@@ -1,5 +1,5 @@
 // 每次更新代码时，修改此版本号，已安装的 PWA 会自动检测并刷新
-const CACHE_VERSION = 'v1.5.0';
+const CACHE_VERSION = 'v2.0.0';
 const CACHE_NAME = `creation-center-${CACHE_VERSION}`;
 
 // 需要预缓存的核心静态资源
@@ -9,25 +9,25 @@ const PRECACHE_ASSETS = [
   './style.css',
   './app.js',
   './manifest.json',
-  './icons/icon-72x72.png',
-  './icons/icon-96x96.png',
-  './icons/icon-128x128.png',
-  './icons/icon-144x144.png',
-  './icons/icon-152x152.png',
-  './icons/icon-192x192.png',
-  './icons/icon-384x384.png',
-  './icons/icon-512x512.png',
-  './icons/apple-touch-icon.png',
-  './icons/favicon-32x32.png',
-  './icons/avatar.png',
-  './icons/girl_sweet.jpg',
-  './icons/girl_mature.jpg',
-  './icons/girl_energetic.jpg',
-  './icons/girl_artistic.jpg',
-  './icons/boy_sunny.jpg',
-  './icons/boy_cool.jpg',
-  './icons/boy_scholar.jpg',
-  './icons/boy_athletic.jpg'
+  './icon-72x72.png',
+  './icon-96x96.png',
+  './icon-128x128.png',
+  './icon-144x144.png',
+  './icon-152x152.png',
+  './icon-192x192.png',
+  './icon-384x384.png',
+  './icon-512x512.png',
+  './apple-touch-icon.png',
+  './favicon-32x32.png',
+  './avatar.png',
+  './girl_sweet.jpg',
+  './girl_mature.jpg',
+  './girl_energetic.jpg',
+  './girl_artistic.jpg',
+  './boy_sunny.jpg',
+  './boy_cool.jpg',
+  './boy_scholar.jpg',
+  './boy_athletic.jpg'
 ];
 
 // 安装阶段：缓存核心资源并立即接管

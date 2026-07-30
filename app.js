@@ -270,14 +270,14 @@ const accountingCats = [
 
 // 预设动漫头像（4女4男，不同风格）
 const avatarPresets = [
-  { src: 'icons/girl_sweet.jpg',      label: '甜妹', gender: '女' },
-  { src: 'icons/girl_mature.jpg',     label: '御姐', gender: '女' },
-  { src: 'icons/girl_energetic.jpg',  label: '元气', gender: '女' },
-  { src: 'icons/girl_artistic.jpg',   label: '文艺', gender: '女' },
-  { src: 'icons/boy_sunny.jpg',       label: '阳光', gender: '男' },
-  { src: 'icons/boy_cool.jpg',         label: '冷酷', gender: '男' },
-  { src: 'icons/boy_scholar.jpg',     label: '书生', gender: '男' },
-  { src: 'icons/boy_athletic.jpg',    label: '运动', gender: '男' }
+  { src: 'girl_sweet.jpg',      label: '甜妹', gender: '女' },
+  { src: 'girl_mature.jpg',     label: '御姐', gender: '女' },
+  { src: 'girl_energetic.jpg',  label: '元气', gender: '女' },
+  { src: 'girl_artistic.jpg',   label: '文艺', gender: '女' },
+  { src: 'boy_sunny.jpg',       label: '阳光', gender: '男' },
+  { src: 'boy_cool.jpg',         label: '冷酷', gender: '男' },
+  { src: 'boy_scholar.jpg',     label: '书生', gender: '男' },
+  { src: 'boy_athletic.jpg',    label: '运动', gender: '男' }
 ];
 
 // ===================== DOM 元素 =====================
