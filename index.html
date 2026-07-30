@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#FF8FAB" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="创作指挥中心" />
+  <meta name="description" content="移动端优先的创作指挥中心 PWA" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="icons/favicon-32x32.png" />
+  <title>创作指挥中心</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 移动端顶部栏 -->
+  <header class="mobile-header" id="mobileHeader">
+    <button class="menu-toggle" id="menuToggle" aria-label="打开菜单">
+      <span></span><span></span><span></span>
+    </button>
+    <h1 class="page-title" id="pageTitle">首页概览</h1>
+    <span class="header-date" id="headerDate"></span>
+  </header>
+
+  <!-- 遮罩 -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- 侧边栏 -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="avatar-wrap">
+        <img src="icons/avatar.png" alt="头像" class="avatar" id="userAvatar" />
+        <button class="avatar-edit" id="avatarEdit" aria-label="更换头像">+</button>
+        <input type="file" id="avatarInput" accept="image/*" hidden />
+      </div>
+      <h2 class="user-name" id="userName" contenteditable="true" spellcheck="false">你怎么想</h2>
+      <p class="user-subtitle" id="userSubtitle" contenteditable="true" spellcheck="false">创作指挥中心 v1.5</p>
+    </div>
+
+    <nav class="sidebar-nav" id="sidebarNav">
+      <a href="#home" class="nav-item active" data-page="home" data-color="#FF8FAB">
+        <span class="nav-dot" style="background:#FF8FAB"></span>首页概览
+      </a>
+      <a href="#mood" class="nav-item" data-page="mood" data-color="#FFB7C5">
+        <span class="nav-dot" style="background:#FFB7C5"></span>每日记录
+      </a>
+      <a href="#recreation" class="nav-item" data-page="recreation" data-color="#FB6F92">
+        <span class="nav-dot" style="background:#FB6F92"></span>爆款二创
+      </a>
+      <a href="#topics" class="nav-item" data-page="topics" data-color="#FF9AA2">
+        <span class="nav-dot" style="background:#FF9AA2"></span>选题生产机
+      </a>
+      <a href="#knowledge" class="nav-item" data-page="knowledge" data-color="#6C5CE7">
+        <span class="nav-dot" style="background:#6C5CE7"></span>知识喂养站
+      </a>
+      <a href="#english" class="nav-item" data-page="english" data-color="#00B894">
+        <span class="nav-dot" style="background:#00B894"></span>英语每日喂养
+      </a>
+      <a href="#accounting" class="nav-item" data-page="accounting" data-color="#E17055">
+        <span class="nav-dot" style="background:#E17055"></span>极简记账
+      </a>
+      <a href="#todo" class="nav-item" data-page="todo" data-color="#0984E3">
+        <span class="nav-dot" style="background:#0984E3"></span>今日待办
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span>PWA v1.3 · 离线可用</span>
+    </div>
+  </aside>
+
+  <!-- 主内容区 -->
+  <main class="main-content" id="mainContent">
+    <!-- 首页概览 -->
+    <section class="page active" id="page-home">
+      <div class="welcome-card">
+        <div class="welcome-text">
+          <p class="welcome-greeting">早安，<span class="welcome-name">创作者</span></p>
+          <h2>今天也要闪闪发光 ✨</h2>
+          <p class="welcome-tip">保持创作节奏，灵感自会敲门。</p>
+        </div>
+        <div class="welcome-illustration">🌸</div>
+      </div>
+      <div class="quick-stats">
+        <div class="stat-card clickable" data-jump="todo"><span class="stat-num" id="statTodo">0</span><span class="stat-label">待办</span></div>
+        <div class="stat-card clickable" data-jump="recreation"><span class="stat-num" id="statInsp">0</span><span class="stat-label">灵感</span></div>
+        <div class="stat-card clickable" data-jump="english"><span class="stat-num" id="statWord">0</span><span class="stat-label">单词</span></div>
+      </div>
+      <div class="section-card">
+        <h3>今日一句</h3>
+        <p class="quote">"创作不是等待灵感，而是每天坐到桌前。"</p>
+      </div>
+    </section>
+
+    <!-- 每日记录 -->
+    <section class="page" id="page-mood">
+      <div class="section-card">
+        <div class="record-header">
+          <h3 id="recordDateTitle" class="no-margin">2026年7月30日 星期四</h3>
+          <div class="record-nav">
+            <button class="icon-btn" id="recordPrevDay" title="前一天">‹</button>
+            <button class="icon-btn" id="recordToday" title="回到今天">📅</button>
+            <button class="icon-btn" id="recordNextDay" title="后一天">›</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>心情如何？</h3>
+        <div class="mood-grid" id="moodGrid">
+          <button class="mood-btn" data-mood="happy">😊<span>开心</span></button>
+          <button class="mood-btn" data-mood="calm">😌<span>平静</span></button>
+          <button class="mood-btn" data-mood="excited">🤩<span>兴奋</span></button>
+          <button class="mood-btn" data-mood="tired">😴<span>疲惫</span></button>
+          <button class="mood-btn" data-mood="sad">😢<span>低落</span></button>
+          <button class="mood-btn" data-mood="angry">😠<span>生气</span></button>
+        </div>
+        <p class="mood-result" id="moodResult">点击表情记录心情</p>
+      </div>
+
+      <div class="section-card">
+        <h3>今天的想法</h3>
+        <textarea id="recordNote" class="record-note" placeholder="写下今天的感悟、灵感、小确幸……"></textarea>
+        <div class="record-save-row">
+          <button class="btn btn-primary" id="saveRecord">保存记录</button>
+          <span class="save-hint" id="recordSaveHint"></span>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>历史记录</h3>
+        <div class="mini-calendar" id="recordCalendar"></div>
+        <ul class="record-history" id="recordHistoryList"></ul>
+      </div>
+    </section>
+
+    <!-- 爆款二创 -->
+    <section class="page" id="page-recreation">
+      <div class="page-header">
+        <h2>爆款二创</h2>
+        <p>精选热门选题，一键二创改编</p>
+      </div>
+      <div class="card-list" id="recreationList"></div>
+    </section>
+
+    <!-- 选题生产机 -->
+    <section class="page" id="page-topics">
+      <div class="section-card center">
+        <h3>随机选题生成器</h3>
+        <div class="topic-box" id="topicBox">点击按钮获取今日选题</div>
+        <button class="btn btn-primary" id="generateTopic">生成选题</button>
+      </div>
+    </section>
+
+    <!-- 知识喂养站 -->
+    <section class="page" id="page-knowledge">
+      <div class="page-header">
+        <h2>知识喂养站</h2>
+        <p>每天学点新东西，认知飞轮慢慢转起来</p>
+      </div>
+      <div id="knowledgeCardWrap"></div>
+      <div class="center-wrap">
+        <button class="btn btn-secondary" id="knowledgeRefresh">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 5.5A10 10 0 1 1 11.26 2.67"/></svg>
+          换一换
+        </button>
+      </div>
+    </section>
+
+    <!-- 英语每日喂养 -->
+    <section class="page" id="page-english">
+      <div class="section-card">
+        <div class="record-header">
+          <h3 id="engDateTitle" class="no-margin">2026年7月30日 星期四</h3>
+          <div class="record-nav">
+            <button class="icon-btn" id="engPrevDay" title="前一天">‹</button>
+            <button class="icon-btn" id="engToday" title="回到今天">📅</button>
+            <button class="icon-btn" id="engNextDay" title="后一天">›</button>
+          </div>
+        </div>
+        <p class="section-hint" id="engModeHint" style="margin-top:8px">今日学习 · 点击「换一换」更新素材</p>
+      </div>
+
+      <div class="english-stats">
+        <p class="english-stats-label">今日英语</p>
+        <h2>雅思词汇 16 + 口语句型 + TED + 翻译 + 影子跟读</h2>
+        <p class="english-stats-tip">点击🔊播放音频 · 单词点击翻转看释义 · 影子跟读可调语速</p>
+      </div>
+
+      <div class="english-tabs" id="englishTabs">
+        <button class="tab-btn active" data-tab="words">单词</button>
+        <button class="tab-btn" data-tab="speaking">口语</button>
+        <button class="tab-btn" data-tab="ted">TED</button>
+        <button class="tab-btn" data-tab="translate">翻译</button>
+        <button class="tab-btn" data-tab="shadowing">影子跟读</button>
+      </div>
+
+      <div class="english-content" id="englishContent">
+        <div class="english-section active" data-section="words">
+          <div class="section-toolbar">
+            <h3 class="english-section-title">雅思词汇（4×4）</h3>
+            <button class="btn-mini-refresh" id="wordsRefresh">换一换</button>
+          </div>
+          <p class="section-hint">点击卡片翻转查看中文释义，考核自己</p>
+          <div class="word-grid-16" id="wordGrid"></div>
+        </div>
+
+        <div class="english-section" data-section="speaking">
+          <div class="section-toolbar">
+            <h3 class="english-section-title">每日口语句型</h3>
+            <button class="btn-mini-refresh" id="speakingRefresh">换一换</button>
+          </div>
+          <div class="card-list" id="speakingList"></div>
+        </div>
+
+        <div class="english-section" data-section="ted">
+          <div class="section-toolbar">
+            <h3 class="english-section-title">TED 推荐</h3>
+            <button class="btn-mini-refresh" id="tedRefresh">换一换</button>
+          </div>
+          <div class="card-list" id="tedList"></div>
+        </div>
+
+        <div class="english-section" data-section="translate">
+          <div class="section-toolbar">
+            <h3 class="english-section-title">翻译练习</h3>
+            <button class="btn-mini-refresh" id="translateRefresh">换一换</button>
+          </div>
+          <div class="card-list" id="translateList"></div>
+        </div>
+
+        <div class="english-section" data-section="shadowing">
+          <div class="section-toolbar">
+            <h3 class="english-section-title">🎙️ 影子跟读</h3>
+            <button class="btn-mini-refresh" id="shadowingRefresh">换一换</button>
+          </div>
+          <p class="section-hint">单点任意句子朗读 · 语速可调 · 整段播放自动连读</p>
+          <div class="speed-control">
+            <label>语速</label>
+            <input type="range" id="engSpeed" min="0.5" max="1.5" step="0.1" value="0.9" />
+            <span id="engSpeedVal">0.9x</span>
+          </div>
+          <div class="card-list" id="shadowingList"></div>
+
+          <div class="shadow-card" style="margin-top:16px">
+            <div class="shadow-title">📝 独白练习</div>
+            <p class="section-hint">自定义字数生成，或随机生成（50-100词）</p>
+            <div class="mono-controls">
+              <input type="number" id="monoWordCount" min="20" max="300" value="60" placeholder="字数" />
+              <button class="btn btn-secondary" id="monoGenerate">生成独白</button>
+              <button class="btn btn-secondary" id="monoRandom">随机生成</button>
+            </div>
+            <div class="mono-text" id="monoText"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>学习日历</h3>
+        <div class="mini-calendar" id="engCalendar"></div>
+        <p class="account-history-title">📋 近期学习</p>
+        <ul class="record-history" id="engHistoryList"></ul>
+      </div>
+    </section>
+
+    <!-- 极简记账 -->
+    <section class="page" id="page-accounting">
+      <div class="section-card">
+        <div class="record-header">
+          <h3 id="accDateTitle" class="no-margin">2026年7月30日 星期四</h3>
+          <div class="record-nav">
+            <button class="icon-btn" id="accPrevDay" title="前一天">‹</button>
+            <button class="icon-btn" id="accToday" title="回到今天">📅</button>
+            <button class="icon-btn" id="accNextDay" title="后一天">›</button>
+          </div>
+        </div>
+        <div class="account-summary" style="margin-top:16px">
+          <div><span class="account-label">支出</span><span class="account-num out" id="accTotalOut">¥0.00</span></div>
+          <div><span class="account-label">收入</span><span class="account-num in" id="accTotalIn">¥0.00</span></div>
+          <div><span class="account-label">结余</span><span class="account-num" id="accTotalBalance" style="color:var(--text)">¥0.00</span></div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>分类记账</h3>
+        <div class="account-cats" id="accountCategoryList"></div>
+
+        <div class="divider"></div>
+
+        <h3 style="margin-top:4px">💰 其他明细</h3>
+        <div class="account-extra">
+          <div class="extra-row">
+            <span class="extra-label">其他支出</span>
+            <input type="number" class="money-input out-input" data-key="otherOut" min="0" step="0.01" placeholder="0.00" />
+          </div>
+          <div class="extra-row">
+            <span class="extra-label">💰 收入</span>
+            <input type="number" class="money-input in-input" data-key="income" min="0" step="0.01" placeholder="0.00" />
+          </div>
+        </div>
+
+        <div class="record-save-row" style="margin-top:16px">
+          <button class="btn btn-primary" id="saveAccount">保存今天</button>
+          <span class="save-hint" id="accSaveHint"></span>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>历史日历</h3>
+        <div class="mini-calendar" id="accountCalendar"></div>
+        <p class="account-history-title">📋 近期收支</p>
+        <ul class="record-history" id="accountHistoryList"></ul>
+      </div>
+    </section>
+
+    <!-- 今日待办 -->
+    <section class="page" id="page-todo">
+      <div class="section-card">
+        <div class="record-header">
+          <h3 id="todoDateTitle" class="no-margin">2026年7月30日 星期四</h3>
+          <div class="record-nav">
+            <button class="icon-btn" id="todoPrevDay" title="前一天">‹</button>
+            <button class="icon-btn" id="todoToday" title="回到今天">📅</button>
+            <button class="icon-btn" id="todoNextDay" title="后一天">›</button>
+          </div>
+        </div>
+        <p class="section-hint" id="todoModeHint" style="margin-top:8px">今日待办会自动延续到明天，每天独立互不影响</p>
+      </div>
+      <div class="section-card">
+        <div class="todo-input-wrap">
+          <input type="text" id="todoInput" placeholder="添加新待办..." />
+          <button class="btn btn-primary" id="addTodo">+</button>
+        </div>
+        <ul class="todo-list" id="todoList"></ul>
+      </div>
+      <div class="section-card">
+        <h3>待办日历</h3>
+        <div class="mini-calendar" id="todoCalendar"></div>
+        <p class="account-history-title">📋 近期待办</p>
+        <ul class="record-history" id="todoHistoryList"></ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- 更新提示 -->
+  <div class="update-toast" id="updateToast">
+    <span>发现新版本，正在自动刷新…</span>
+  </div>
+
+  <!-- 头像选择弹窗 -->
+  <div class="avatar-picker" id="avatarPicker">
+    <div class="avatar-picker-card">
+      <div class="avatar-picker-head">
+        <h3>选择头像</h3>
+        <button class="avatar-picker-close" id="avatarPickerClose" aria-label="关闭">×</button>
+      </div>
+      <p class="avatar-picker-tip">动漫风格 · 4女4男不同风格，点击即用</p>
+      <div class="avatar-grid" id="avatarGrid"></div>
+      <button class="btn btn-secondary avatar-picker-upload" id="avatarPickerUpload">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        上传自定义头像
+      </button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
