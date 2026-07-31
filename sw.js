@@ -1,5 +1,5 @@
 // 每次更新代码时，修改此版本号，已安装的 PWA 会自动检测并刷新
-const CACHE_VERSION = 'v2.0.0';
+const CACHE_VERSION = 'v2.2.0';
 const CACHE_NAME = `creation-center-${CACHE_VERSION}`;
 
 // 需要预缓存的核心静态资源

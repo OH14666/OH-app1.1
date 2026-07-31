@@ -22,6 +22,7 @@
     </button>
     <h1 class="page-title" id="pageTitle">首页概览</h1>
     <span class="header-date" id="headerDate"></span>
+    <span class="net-status" id="netStatus"><span class="net-dot"></span><span class="net-text">在线</span></span>
   </header>
 
   <!-- 遮罩 -->
@@ -36,7 +37,7 @@
         <input type="file" id="avatarInput" accept="image/*" hidden />
       </div>
       <h2 class="user-name" id="userName" contenteditable="true" spellcheck="false">你怎么想</h2>
-      <p class="user-subtitle" id="userSubtitle" contenteditable="true" spellcheck="false">创作指挥中心 v2.0</p>
+      <p class="user-subtitle" id="userSubtitle" contenteditable="true" spellcheck="false">创作指挥中心 v2.1</p>
     </div>
 
     <nav class="sidebar-nav" id="sidebarNav">
@@ -67,7 +68,8 @@
     </nav>
 
     <div class="sidebar-footer">
-      <span>PWA v1.3 · 离线可用</span>
+      <span>PWA v2.0 · 离线可用</span>
+      <button id="exportDataBtn" class="btn-export" title="导出所有数据">📦 备份</button>
     </div>
   </aside>
 
@@ -167,6 +169,10 @@
           换一换
         </button>
       </div>
+      <div class="history-section" style="margin-top:24px">
+        <h4 style="color:var(--primary);font-size:15px;margin-bottom:10px">📚 历史知识（最近20条）</h4>
+        <ul id="knowledgeHistoryList" class="history-list"></ul>
+      </div>
     </section>
 
     <!-- 英语每日喂养 -->
@@ -181,11 +187,16 @@
           </div>
         </div>
         <p class="section-hint" id="engModeHint" style="margin-top:8px">今日学习 · 点击「换一换」更新素材</p>
+        <div class="quote-card" id="engQuoteCard">
+          <p class="quote-en" id="engQuoteEn">Loading...</p>
+          <p class="quote-cn" id="engQuoteCn"></p>
+          <button class="quote-refresh" id="engQuoteRefresh">换一句名言</button>
+        </div>
       </div>
 
       <div class="english-stats">
         <p class="english-stats-label">今日英语</p>
-        <h2>雅思词汇 16 + 口语句型 + TED + 翻译 + 影子跟读</h2>
+        <h2>雅思词汇 16 + 口语句型 + TED + 影子跟读</h2>
         <p class="english-stats-tip">点击🔊播放音频 · 单词点击翻转看释义 · 影子跟读可调语速</p>
       </div>
 
@@ -193,7 +204,6 @@
         <button class="tab-btn active" data-tab="words">单词</button>
         <button class="tab-btn" data-tab="speaking">口语</button>
         <button class="tab-btn" data-tab="ted">TED</button>
-        <button class="tab-btn" data-tab="translate">翻译</button>
         <button class="tab-btn" data-tab="shadowing">影子跟读</button>
       </div>
 
@@ -223,14 +233,6 @@
           <div class="card-list" id="tedList"></div>
         </div>
 
-        <div class="english-section" data-section="translate">
-          <div class="section-toolbar">
-            <h3 class="english-section-title">翻译练习</h3>
-            <button class="btn-mini-refresh" id="translateRefresh">换一换</button>
-          </div>
-          <div class="card-list" id="translateList"></div>
-        </div>
-
         <div class="english-section" data-section="shadowing">
           <div class="section-toolbar">
             <h3 class="english-section-title">🎙️ 影子跟读</h3>
@@ -239,14 +241,22 @@
           <p class="section-hint">单点任意句子朗读 · 语速可调 · 整段播放自动连读</p>
           <div class="speed-control">
             <label>语速</label>
-            <input type="range" id="engSpeed" min="0.5" max="1.5" step="0.1" value="0.9" />
+            <input type="range" id="engSpeed" min="0.5" max="2.0" step="0.1" value="0.9" />
             <span id="engSpeedVal">0.9x</span>
+          </div>
+          <div class="audio-player-bar" id="audioPlayerBar" style="display:none">
+            <button class="audio-play-pause" id="audioPlayPause">⏸️</button>
+            <div class="audio-progress-wrap">
+              <div class="audio-progress" id="audioProgress"></div>
+            </div>
+            <span class="audio-time" id="audioTime">0:00</span>
+            <button class="audio-stop" id="audioStop">⏹️</button>
           </div>
           <div class="card-list" id="shadowingList"></div>
 
           <div class="shadow-card" style="margin-top:16px">
             <div class="shadow-title">📝 独白练习</div>
-            <p class="section-hint">自定义字数生成，或随机生成（50-100词）</p>
+            <p class="section-hint">自定义字数生成，或随机生成（50-100词）· 可单句播放</p>
             <div class="mono-controls">
               <input type="number" id="monoWordCount" min="20" max="300" value="60" placeholder="字数" />
               <button class="btn btn-secondary" id="monoGenerate">生成独白</button>

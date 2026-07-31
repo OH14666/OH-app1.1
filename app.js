@@ -245,7 +245,47 @@ const knowledgePool = [
   { title: "艾宾浩斯遗忘曲线", content: "学完后 20 分钟、1 小时、1 天、3 天、7 天重复复习，记忆留存率会大幅提升。" },
   { title: "心流理论", content: "当任务难度与技能水平完美匹配时，你会进入忘记时间、高度专注的状态。" },
   { title: "锚定效应", content: "人们对事物的判断会被第一印象深深影响。先开口的人掌握了定价权。" },
-  { title: "峰终定律", content: "用户只记得体验中最强烈的部分和最后结束的感觉。开头要抓人，结尾要升华。" }
+  { title: "峰终定律", content: "用户只记得体验中最强烈的部分和最后结束的感觉。开头要抓人，结尾要升华。" },
+  { title: "奥卡姆剃刀", content: "如无必要，勿增实体。简单的方案往往比复杂的方案更有效。" },
+  { title: "逆向思维", content: "反过来想，总是反过来想。查理·芒格说：告诉我我会死在哪里，我就永远不去那个地方。" },
+  { title: "第一性原理", content: "回到事物最基本的事实和假设，从零开始推理，而不是依赖类比和经验。" },
+  { title: "系统思维", content: "不孤立地看问题，而是把它放在整个系统中思考，关注各要素之间的联系和反馈回路。" },
+  { title: "机会成本", content: "选择一个选项的同时，你放弃了其他所有选项。最贵的成本是你为某事花费的时间。" },
+  { title: "沉没成本谬误", content: "过去投入的成本不应该影响现在的决策。重要的是未来的收益，而不是过去的付出。" },
+  { title: "边际效应递减", content: "当你已经拥有很多某样东西时，再多增加一单位所带来的满足感会越来越少。" },
+  { title: "幸存者偏差", content: "你只看到了幸存下来的案例，而忽略了那些没有幸存的，从而得出错误结论。" },
+  { title: "霍桑效应", content: "当人们知道自己被观察时，会改变自己的行为。注意到这一点可以让你更客观地看待事物。" },
+  { title: " placebo 效应", content: "信念本身就能产生实际的效果。相信自己能做到，往往就真的能做到。" },
+  { title: "二八定律的应用", content: "在任何领域，顶尖 20% 的人创造了 80% 的价值。找到你领域里那最关键的 20%。" },
+  { title: "能力圈", content: "巴菲特说：只在你理解的领域内投资。了解自己的能力范围比扩展能力范围更重要。" },
+  { title: "黑天鹅事件", content: "那些罕见但影响巨大的事件。不要试图预测它们，而是要让自己变得更有韧性。" },
+  { title: "反脆弱", content: "塔勒布提出：有些事物不仅能从冲击中存活，还能从冲击中获益。成为反脆弱的系统。" },
+  { title: "极简主义", content: "少即是多。去掉一切不必要的东西，剩下的才是真正重要的。" },
+  { title: "成长型思维", content: "能力不是天生的，而是可以通过努力培养的。拥抱挑战，从失败中学习。" },
+  { title: "认知失调", content: "当信念与行为不一致时，人们会感到不舒服，并试图改变行为或信念来减少这种不协调。" },
+  { title: "确认偏误", content: "人们倾向于寻找、解释和记住能够证实自己已有信念的信息。要主动寻找反例。" },
+  { title: "可得性启发法", content: "容易想到的案例会被高估其发生概率。不要用身边的例子来判断整体情况。" },
+  { title: "邓巴数字", content: "人类能够维持稳定社交关系的人数上限大约是 150 人。超过这个数量，关系就会变得表面。" },
+  { title: "拖延症的本质", content: "拖延不是时间管理问题，而是情绪管理问题。你拖延的不是任务，而是任务带来的负面情绪。" },
+  { title: "两分钟法则", content: "如果一件事能在两分钟内完成，就立刻去做。不要放进待办清单。" },
+  { title: "番茄工作法", content: "25 分钟专注 + 5 分钟休息为一个循环。四个番茄后长休一次。保持高质量专注。" },
+  { title: "GTD 方法", content: "收集-澄清-组织-回顾-执行。把所有待办从脑中清空，放到一个可靠的系统里。" },
+  { title: "晨间仪式", content: "每天早起后的第一个小时决定了你一整天的状态。用它来做最重要的事。" },
+  { title: "深度学习", content: "霍华德·加德纳提出：真正的学习需要超越表面信息，理解底层原理并能迁移应用。" },
+  { title: "创造性破坏", content: "熊彼特提出：创新会摧毁旧产业的同时创造新产业。拥抱变化才能不被淘汰。" },
+  { title: "长板理论", content: "在资源稀缺时，把所有资源集中在你的最长板上，而不是努力补短板。" },
+  { title: "临界点效应", content: "在达到临界点之前，一切都是白费功夫。但只要再坚持一点，就会发生质的飞跃。" },
+  { title: "飞轮效应", content: "飞轮转动需要一开始用很大的力气，但一旦转起来，就会自己持续转动。开始最难。" },
+  { title: "蝴蝶效应", content: "一个微小的初始变化可能导致巨大的连锁反应。你的每一个小选择都很重要。" },
+  { title: "破窗效应", content: "如果一幢建筑物的窗户玻璃被打破后没有及时维修，别人就可能受到暗示性纵容去打烂更多的窗户。" },
+  { title: "华盛顿合作定律", content: "一个人敷衍了事，两个人互相推诿，三个人则永无成事之日。明确分工才能避免内耗。" },
+  { title: "木桶定律", content: "一只水桶能装多少水取决于它最短的那块木板。找出你的短板，但也要注意长板优势。" },
+  { title: "刺猬法则", content: "两只刺猬想取暖，靠太近会扎到对方，离太远又会冷。人际关系中的心理距离也是如此。" },
+  { title: "手表定律", content: "只有一块手表时你可以知道准确时间，但有两块时你就无法确定了。选择太多反而迷茫。" },
+  { title: "不值得定律", content: "不值得做的事情，就不值得做好。先判断值不值得，再投入精力。" },
+  { title: "墨菲定律", content: "凡事可能出错就一定会出错。但这不代表悲观，而是要做最坏的打算，最好的准备。" },
+  { title: "二八法则的反向应用", content: "20% 的时间投入带来 80% 的成果。找到那关键的 20%，把更多时间投入进去。" },
+  { title: "知识的诅咒", content: "当你非常熟悉某个领域时，你会发现很难向不熟悉的人解释，因为你已经忘记了不懂得是什么感觉。" }
 ];
 
 const topicPool = [
@@ -294,29 +334,183 @@ const userAvatar = document.getElementById('userAvatar');
 const avatarEdit = document.getElementById('avatarEdit');
 const avatarInput = document.getElementById('avatarInput');
 
-// ========== TTS（朗读）工具 ==========
+// ========== 音频播放器（带进度条+暂停）==========
 let engSpeed = 0.9;
-let lastUtterance = null;
+let currentAudio = null;
+let playAllQueue = [];
+let playAllIndex = 0;
+let playAllMode = false;
+
+function getTTSUrl(text, lang = 'en') {
+  return `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${lang}&client=tw-ob`;
+}
+
+function fmtAudioTime(sec) {
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  return m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+function showAudioBar() {
+  const bar = document.getElementById('audioPlayerBar');
+  if (bar) bar.style.display = 'flex';
+}
+function hideAudioBar() {
+  const bar = document.getElementById('audioPlayerBar');
+  if (bar) bar.style.display = 'none';
+}
+function updateAudioBar(audio) {
+  const prog = document.getElementById('audioProgress');
+  const time = document.getElementById('audioTime');
+  const btn = document.getElementById('audioPlayPause');
+  if (audio.duration) {
+    const pct = (audio.currentTime / audio.duration) * 100;
+    if (prog) prog.style.width = pct + '%';
+    if (time) time.textContent = fmtAudioTime(audio.currentTime) + '/' + fmtAudioTime(audio.duration);
+  }
+  if (btn) btn.textContent = audio.paused ? '▶️' : '⏸️';
+}
+
+function playAudio(text, btnEl, rate, onEndedCb) {
+  if (!text) return;
+  stopAudio();
+  const speed = rate === undefined ? engSpeed : rate;
+  const url = getTTSUrl(text, 'en');
+  const audio = new Audio(url);
+  audio.playbackRate = speed;
+  audio.crossOrigin = 'anonymous';
+  
+  document.querySelectorAll('.speak-btn.playing').forEach(b => b.classList.remove('playing'));
+  if (btnEl) btnEl.classList.add('playing');
+  
+  currentAudio = audio;
+  playAllMode = false;
+  showAudioBar();
+  
+  audio.addEventListener('timeupdate', () => updateAudioBar(audio));
+  audio.addEventListener('loadedmetadata', () => updateAudioBar(audio));
+  audio.addEventListener('play', () => updateAudioBar(audio));
+  audio.addEventListener('pause', () => updateAudioBar(audio));
+  
+  audio.play().catch(() => {
+    if (btnEl) btnEl.classList.remove('playing');
+    showToast('音频加载失败，请检查网络');
+    hideAudioBar();
+  });
+  
+  audio.onended = () => {
+    if (btnEl) btnEl.classList.remove('playing');
+    if (onEndedCb) { onEndedCb(); }
+    else { hideAudioBar(); }
+  };
+  audio.onerror = () => {
+    if (btnEl) btnEl.classList.remove('playing');
+    showToast('音频加载失败');
+    hideAudioBar();
+  };
+}
+
+function stopAudio() {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio = null;
+  }
+  playAllMode = false;
+  playAllQueue = [];
+  document.querySelectorAll('.speak-btn.playing').forEach(b => b.classList.remove('playing'));
+  hideAudioBar();
+}
+
+function togglePlayPause() {
+  if (!currentAudio) return;
+  if (currentAudio.paused) {
+    currentAudio.play();
+  } else {
+    currentAudio.pause();
+  }
+}
+
 function speak(text, btnEl, rate) {
-  if (!('speechSynthesis' in window)) { showToast('当前浏览器不支持语音朗读'); return; }
+  playAudio(text, btnEl, rate);
+}
+
+// ========== 网络状态监控 ==========
+function initNetworkStatus() {
+  const el = document.getElementById('netStatus');
+  if (!el) return;
+  function update() {
+    if (navigator.onLine) {
+      el.classList.remove('offline');
+      el.querySelector('.net-text').textContent = '在线';
+    } else {
+      el.classList.add('offline');
+      el.querySelector('.net-text').textContent = '离线';
+    }
+  }
+  update();
+  window.addEventListener('online', update);
+  window.addEventListener('offline', update);
+}
+
+// ========== 联网获取名言 ==========
+async function fetchOnlineQuote() {
   try {
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'en-US';
-    u.rate = (rate === undefined ? engSpeed : rate);
-    u.pitch = 1;
-    document.querySelectorAll('.speak-btn.playing').forEach(b => b.classList.remove('playing'));
-    if (btnEl) btnEl.classList.add('playing');
-    lastUtterance = u;
-    u.onend = () => { if (btnEl) btnEl.classList.remove('playing'); };
-    u.onerror = () => { if (btnEl) btnEl.classList.remove('playing'); };
-    window.speechSynthesis.speak(u);
-  } catch (e) { console.error(e); }
+    const res = await fetch('https://api.quotable.io/random?maxLength=120');
+    if (!res.ok) throw new Error('API error');
+    const data = await res.json();
+    return { en: data.content, author: data.author };
+  } catch (e) {
+    return null;
+  }
+}
+
+// 联网获取单词例句
+async function fetchWordExample(word) {
+  try {
+    const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word.toLowerCase())}`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    for (const entry of data) {
+      if (entry.meanings) {
+        for (const meaning of entry.meanings) {
+          if (meaning.definitions) {
+            for (const def of meaning.definitions) {
+              if (def.example) return def.example;
+            }
+          }
+        }
+      }
+    }
+    // 没找到例句，用第一个释义造一个
+    if (data[0] && data[0].meanings && data[0].meanings[0] && data[0].meanings[0].definitions[0]) {
+      const def = data[0].meanings[0].definitions[0];
+      return def.definition;
+    }
+    return null;
+  } catch (e) {
+    return null;
+  }
+}
+
+// 单词收藏
+function getFavorites() {
+  return JSON.parse(localStorage.getItem('cc_word_favorites') || '[]');
+}
+function toggleFavorite(word, ph, cn) {
+  const favs = getFavorites();
+  const idx = favs.findIndex(f => f.en === word);
+  if (idx >= 0) {
+    favs.splice(idx, 1);
+  } else {
+    favs.push({ en: word, ph: ph, cn: cn, ts: Date.now() });
+  }
+  localStorage.setItem('cc_word_favorites', JSON.stringify(favs));
 }
 
 // ===================== 初始化 =====================
 document.addEventListener('DOMContentLoaded', () => {
   initDate();
+  initNetworkStatus();
   initNavigation();
   initSidebar();
   initRecreation();
@@ -328,6 +522,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initTopicGenerator();
   initProfile();
   initServiceWorker();
+  initDataBackup();
+  initAudioControls();
   updateHomeStats();
   document.addEventListener('click', (e) => {
     const card = e.target.closest('.stat-card.clickable');
@@ -542,14 +738,100 @@ function addTodoToToday(text) {
 function initKnowledge() {
   const wrap = document.getElementById('knowledgeCardWrap');
   const btn = document.getElementById('knowledgeRefresh');
-  let idx = 0;
-  function render() {
-    const k = knowledgePool[idx];
-    wrap.innerHTML = `<div class="knowledge-card"><h3 style="margin-bottom:10px">${k.title}</h3><p style="font-size:14px;line-height:1.75;color:var(--text)">${k.content}</p></div>`;
+  const historyList = document.getElementById('knowledgeHistoryList');
+  const seenKey = 'cc_knowledge_seen';
+  const historyKey = 'cc_knowledge_history';
+  
+  function getSeen() {
+    return JSON.parse(localStorage.getItem(seenKey) || '[]');
   }
+  function getHistory() {
+    return JSON.parse(localStorage.getItem(historyKey) || '[]');
+  }
+  function saveSeen(arr) {
+    const seen = getSeen();
+    arr.forEach(i => { if (!seen.includes(i)) seen.push(i); });
+    localStorage.setItem(seenKey, JSON.stringify(seen));
+  }
+  function addToHistory(title, content) {
+    const history = getHistory();
+    history.unshift({ title, content, ts: Date.now() });
+    if (history.length > 100) history.length = 100;
+    localStorage.setItem(historyKey, JSON.stringify(history));
+  }
+  
+  function pickRandomLocal() {
+    const seen = getSeen();
+    const remaining = [];
+    for (let i = 0; i < knowledgePool.length; i++) {
+      if (!seen.includes(i)) remaining.push(i);
+    }
+    if (remaining.length === 0) {
+      localStorage.setItem(seenKey, '[]');
+      return Math.floor(Math.random() * knowledgePool.length);
+    }
+    return remaining[Math.floor(Math.random() * remaining.length)];
+  }
+  
+  function renderHistory() {
+    if (!historyList) return;
+    const history = getHistory();
+    if (!history.length) {
+      historyList.innerHTML = `<li style="text-align:center;color:var(--text-secondary);background:transparent">暂无历史记录</li>`;
+      return;
+    }
+    historyList.innerHTML = history.slice(0, 20).map(item => `
+      <li class="knowledge-history-item">
+        <div class="history-date">${new Date(item.ts).toLocaleDateString('zh-CN')} · ${item.title}</div>
+        <div class="history-text">${item.content}</div>
+      </li>`).join('');
+  }
+  
+  function renderLocal() {
+    const idx = pickRandomLocal();
+    const k = knowledgePool[idx];
+    const seen = getSeen();
+    wrap.innerHTML = `
+      <div class="knowledge-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <h3 style="margin:0">${k.title}</h3>
+          <span style="font-size:11px;color:var(--text-secondary);background:var(--primary-light);padding:3px 8px;border-radius:10px">📚 ${seen.length}/${knowledgePool.length}</span>
+        </div>
+        <p style="font-size:14px;line-height:1.75;color:var(--text)">${k.content}</p>
+      </div>`;
+    saveSeen([idx]);
+    addToHistory(k.title, k.content);
+    renderHistory();
+  }
+  
+  async function renderOnline() {
+    if (!navigator.onLine) { renderLocal(); return; }
+    const quote = await fetchOnlineQuote();
+    if (!quote) { renderLocal(); return; }
+    wrap.innerHTML = `
+      <div class="knowledge-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <h3 style="margin:0">💡 名言启发</h3>
+          <span style="font-size:11px;color:#4caf50;background:#e8f5e9;padding:3px 8px;border-radius:10px">🌐 联网</span>
+        </div>
+        <p style="font-size:14px;font-style:italic;line-height:1.75;color:var(--text)">${quote.en}</p>
+        <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">— ${quote.author}</p>
+      </div>`;
+    addToHistory(quote.author + ' 名言', quote.en);
+    renderHistory();
+  }
+  
+  function render() {
+    if (navigator.onLine) {
+      wrap.innerHTML = '<div class="knowledge-card"><p style="text-align:center;color:var(--text-secondary)">加载中...</p></div>';
+      renderOnline();
+    } else {
+      renderLocal();
+    }
+  }
+  
   render();
   btn.addEventListener('click', () => {
-    idx = (idx + 1 + Math.floor(Math.random() * (knowledgePool.length - 1))) % knowledgePool.length;
     wrap.style.opacity = '0.3';
     setTimeout(() => { render(); wrap.style.opacity = '1'; }, 150);
   });
@@ -567,17 +849,25 @@ function initEnglish() {
   const historyList = document.getElementById('engHistoryList');
   const speedInput = document.getElementById('engSpeed');
   const speedVal = document.getElementById('engSpeedVal');
+  
+  // 加载保存的语速
+  const savedSpeed = localStorage.getItem('cc_eng_speed');
+  if (savedSpeed) {
+    engSpeed = parseFloat(savedSpeed);
+    speedInput.value = engSpeed;
+    speedVal.textContent = engSpeed.toFixed(1) + 'x';
+  }
 
   speedInput.addEventListener('input', () => {
     engSpeed = parseFloat(speedInput.value);
     speedVal.textContent = engSpeed.toFixed(1) + 'x';
+    localStorage.setItem('cc_eng_speed', engSpeed.toString());
   });
 
   // 生成器
   function genWords() { return pickN(ieltsPool, 16); }
   function genSpeaking() { return pickN(speakingPool, 4); }
   function genTed() { return pickN(tedPool, 3); }
-  function genTranslate() { return pickN(translatePool, 3); }
   function genShadowing() { return shadowingPool.slice(); }
   function genMonologue(targetWords) {
     const sentences = shuffle(monologueSentences);
@@ -595,15 +885,18 @@ function initEnglish() {
     const k = 'cc_eng_' + fmtDate(date);
     let data = JSON.parse(localStorage.getItem(k) || 'null');
     if (!data) {
-      data = { words: genWords(), speaking: genSpeaking(), ted: genTed(), translate: genTranslate(), shadowing: genShadowing(), monologue: '' };
+      data = { words: genWords(), speaking: genSpeaking(), ted: genTed(), shadowing: genShadowing(), monologue: '' };
       localStorage.setItem(k, JSON.stringify(data));
     }
     return data;
   }
 
   function renderWords(words) {
-    document.getElementById('wordGrid').innerHTML = words.map(w => `
-      <div class="wcard" data-revealed="false" data-en="${encodeURIComponent(w.en)}">
+    const favs = getFavorites();
+    document.getElementById('wordGrid').innerHTML = words.map(w => {
+      const isFav = favs.some(f => f.en === w.en);
+      return `
+      <div class="wcard" data-revealed="false" data-en="${encodeURIComponent(w.en)}" data-ph="${encodeURIComponent(w.ph)}" data-cn="${encodeURIComponent(w.cn)}">
         <div class="wcard-en">${w.en}</div>
         <div class="wcard-ph">${w.ph}</div>
         <div class="wcard-cn-wrap">
@@ -611,11 +904,57 @@ function initEnglish() {
           <div class="wcard-cn-cover">点击查看释义</div>
         </div>
         <button class="speak-btn" data-spe="${encodeURIComponent(w.en)}">🔊</button>
-      </div>`).join('');
+        <div class="wcard-actions">
+          <button class="wcard-action-btn ex-btn" data-word="${encodeURIComponent(w.en)}">📖 例句</button>
+          <button class="wcard-action-btn fav-btn ${isFav ? 'favorited' : ''}" data-fav-en="${encodeURIComponent(w.en)}" data-fav-ph="${encodeURIComponent(w.ph)}" data-fav-cn="${encodeURIComponent(w.cn)}">${isFav ? '★ 已收藏' : '☆ 收藏'}</button>
+        </div>
+        <div class="wcard-example" data-ex-for="${encodeURIComponent(w.en)}"></div>
+      </div>`;
+    }).join('');
+    
     document.querySelectorAll('#wordGrid .wcard').forEach(card => {
       card.addEventListener('click', (e) => {
-        if (e.target.closest('.speak-btn')) return;
+        if (e.target.closest('.speak-btn') || e.target.closest('.wcard-action-btn') || e.target.closest('.wcard-example')) return;
         card.dataset.revealed = card.dataset.revealed === 'true' ? 'false' : 'true';
+      });
+    });
+    
+    // 例句按钮
+    document.querySelectorAll('#wordGrid .ex-btn').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const word = decodeURIComponent(btn.dataset.word);
+        const exDiv = document.querySelector(`.wcard-example[data-ex-for="${encodeURIComponent(word)}"]`);
+        if (exDiv.classList.contains('show')) {
+          exDiv.classList.remove('show');
+          btn.textContent = '📖 例句';
+          return;
+        }
+        exDiv.innerHTML = '查询中...';
+        exDiv.classList.add('show');
+        btn.textContent = '📖 收起';
+        const example = await fetchWordExample(word);
+        if (example) {
+          exDiv.innerHTML = `💬 ${example}<button class="speak-btn" style="margin-left:4px;font-size:12px" data-spe="${encodeURIComponent(example)}">🔊</button>`;
+        } else {
+          exDiv.innerHTML = '暂无例句数据';
+        }
+      });
+    });
+    
+    // 收藏按钮
+    document.querySelectorAll('#wordGrid .fav-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const en = decodeURIComponent(btn.dataset.favEn);
+        const ph = decodeURIComponent(btn.dataset.favPh);
+        const cn = decodeURIComponent(btn.dataset.favCn);
+        toggleFavorite(en, ph, cn);
+        const favs = getFavorites();
+        const isFav = favs.some(f => f.en === en);
+        btn.classList.toggle('favorited', isFav);
+        btn.textContent = isFav ? '★ 已收藏' : '☆ 收藏';
+        showToast(isFav ? '已收藏' : '已取消收藏');
       });
     });
   }
@@ -641,15 +980,6 @@ function initEnglish() {
       </div>`).join('');
   }
 
-  function renderTranslate(items) {
-    document.getElementById('translateList').innerHTML = items.map(s => `
-      <div class="speaking-card">
-        <div class="card-head"><h4>${s.title}</h4><button class="speak-btn speak-btn-head" data-spe="${encodeURIComponent(s.en)}">🔊</button></div>
-        <p style="font-size:14px;color:var(--text);line-height:1.7">${s.content}</p>
-        <p style="margin-top:8px;padding:8px 12px;background:var(--bg);border-radius:10px;font-size:13px;color:var(--primary-dark);font-style:italic">🔖 参考英文：${s.en}</p>
-      </div>`).join('');
-  }
-
   function renderShadowing(dialogues) {
     document.getElementById('shadowingList').innerHTML = dialogues.map((d, i) => `
       <div class="shadow-card">
@@ -666,16 +996,28 @@ function initEnglish() {
 
   function renderMonologue(monoData) {
     const mono = document.getElementById('monoText');
-    // 兼容旧数据（纯字符串）
     const enText = (typeof monoData === 'string') ? monoData : (monoData && monoData.en);
     const cnText = (monoData && typeof monoData === 'object') ? monoData.cn : '';
     if (!enText) {
       mono.innerHTML = '<span style="color:var(--text-secondary);font-size:13px">点击上方按钮生成独白文本</span>';
       return;
     }
+    // 拆分为单句，每句配一个播放按钮
+    const sentences = enText.match(/[^.!?]+[.!?]+/g) || [enText];
+    const cnSentences = cnText ? (cnText.match(/[^。！？]+[。！？]+/g) || [cnText]) : [];
     mono.innerHTML = `
-      <div class="mono-en">${enText}<button class="speak-btn mono-speak" data-spe="${encodeURIComponent(enText)}">🔊</button></div>
-      ${cnText ? `<div class="mono-cn">📝 中文翻译：${cnText}</div>` : ''}
+      <div class="mono-en">
+        ${sentences.map((s, i) => `
+          <div class="mono-sentence">
+            <button class="speak-btn" data-spe="${encodeURIComponent(s.trim())}">🔊</button>
+            <span>${s.trim()}</span>
+          </div>
+          ${cnSentences[i] ? `<div style="margin-left:26px;font-size:12px;color:var(--text-secondary);margin-bottom:8px">${cnSentences[i].trim()}</div>` : ''}
+        `).join('')}
+      </div>
+      <div style="margin-top:8px">
+        <button class="speak-btn" data-spe="${encodeURIComponent(enText)}" style="font-size:12px">🔊 播放全文</button>
+      </div>
     `;
   }
 
@@ -687,7 +1029,6 @@ function initEnglish() {
     renderWords(data.words);
     renderSpeaking(data.speaking);
     renderTed(data.ted);
-    renderTranslate(data.translate);
     renderShadowing(data.shadowing);
     renderMonologue(data.monologue || '');
     renderCalendar();
@@ -713,7 +1054,6 @@ function initEnglish() {
   document.getElementById('wordsRefresh').addEventListener('click', () => { refreshSection('words'); });
   document.getElementById('speakingRefresh').addEventListener('click', () => { refreshSection('speaking'); });
   document.getElementById('tedRefresh').addEventListener('click', () => { refreshSection('ted'); });
-  document.getElementById('translateRefresh').addEventListener('click', () => { refreshSection('translate'); });
   document.getElementById('shadowingRefresh').addEventListener('click', () => { refreshSection('shadowing'); });
 
   function refreshSection(section) {
@@ -722,7 +1062,6 @@ function initEnglish() {
     if (section === 'words') data.words = genWords();
     if (section === 'speaking') data.speaking = genSpeaking();
     if (section === 'ted') data.ted = genTed();
-    if (section === 'translate') data.translate = genTranslate();
     if (section === 'shadowing') data.shadowing = genShadowing();
     data.updatedAt = Date.now();
     localStorage.setItem(k, JSON.stringify(data));
@@ -773,20 +1112,16 @@ function initEnglish() {
     const lines = data.shadowing[i].lines;
     let idx = 0;
     function next() {
-      if (idx >= lines.length) return;
+      if (idx >= lines.length) { stopAudio(); return; }
       const card = document.querySelectorAll('.shadow-card')[i];
       if (!card) return;
       const btns = card.querySelectorAll('.speak-btn');
       const targetBtn = btns[idx];
       const lineEn = lines[idx].en;
-      speak(lineEn, targetBtn);
-      const checkEnd = setInterval(() => {
-        if (!window.speechSynthesis.speaking) {
-          clearInterval(checkEnd);
-          idx++;
-          setTimeout(next, 600);
-        }
-      }, 300);
+      playAudio(lineEn, targetBtn, engSpeed, () => {
+        idx++;
+        setTimeout(next, 400);
+      });
     }
     next();
   }
@@ -821,6 +1156,28 @@ function initEnglish() {
       });
     });
   }
+
+  // 名言获取
+  async function loadQuote() {
+    const enEl = document.getElementById('engQuoteEn');
+    const cnEl = document.getElementById('engQuoteCn');
+    if (!enEl) return;
+    enEl.textContent = '加载中...';
+    cnEl.textContent = '';
+    const quote = await fetchOnlineQuote();
+    if (quote) {
+      enEl.textContent = `"${quote.en}"`;
+      cnEl.textContent = `— ${quote.author}`;
+    } else {
+      // 离线兜底
+      const fallback = knowledgePool[Math.floor(Math.random() * knowledgePool.length)];
+      enEl.textContent = fallback.title;
+      cnEl.textContent = fallback.content;
+    }
+  }
+  const quoteRefreshBtn = document.getElementById('engQuoteRefresh');
+  if (quoteRefreshBtn) quoteRefreshBtn.addEventListener('click', loadQuote);
+  loadQuote();
 
   renderAll();
 }
@@ -1176,3 +1533,92 @@ function initServiceWorker() {
   navigator.serviceWorker.addEventListener('controllerchange', () => { if (refreshing) return; refreshing = true; window.location.reload(); });
 }
 function showUpdateToast() { const toast = document.getElementById('updateToast'); if (toast) { toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 3000); } }
+
+// ===================== 数据导出/导入 =====================
+function initDataBackup() {
+  const exportBtn = document.getElementById('exportDataBtn');
+  if (!exportBtn) return;
+  
+  exportBtn.addEventListener('click', () => {
+    const data = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      data[key] = localStorage.getItem(key);
+    }
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `创作指挥中心_备份_${fmtDate(new Date())}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('数据已导出，请妥善保存');
+  });
+  
+  // 添加长按导入功能
+  let pressTimer;
+  exportBtn.addEventListener('touchstart', () => {
+    pressTimer = setTimeout(() => {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.json';
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          try {
+            const data = JSON.parse(ev.target.result);
+            if (!confirm('导入将覆盖所有现有数据，确定继续？')) return;
+            Object.keys(data).forEach(key => localStorage.setItem(key, data[key]));
+            showToast('数据导入成功，即将刷新');
+            setTimeout(() => window.location.reload(), 1000);
+          } catch (err) {
+            showToast('文件格式错误');
+          }
+        };
+        reader.readAsText(file);
+      };
+      input.click();
+    }, 800);
+  });
+  exportBtn.addEventListener('touchend', () => clearTimeout(pressTimer));
+  exportBtn.addEventListener('touchmove', () => clearTimeout(pressTimer));
+  
+  // 桌面端支持
+  exportBtn.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = (ev) => {
+      const file = ev.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (res) => {
+        try {
+          const data = JSON.parse(res.target.result);
+          if (!confirm('导入将覆盖所有现有数据，确定继续？')) return;
+          Object.keys(data).forEach(key => localStorage.setItem(key, data[key]));
+          showToast('数据导入成功，即将刷新');
+          setTimeout(() => window.location.reload(), 1000);
+        } catch (err) {
+          showToast('文件格式错误');
+        }
+      };
+      reader.readAsText(file);
+    };
+    input.click();
+  });
+}
+
+// ===================== 音频播放器控制 =====================
+function initAudioControls() {
+  const playPauseBtn = document.getElementById('audioPlayPause');
+  const stopBtn = document.getElementById('audioStop');
+  if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlayPause);
+  if (stopBtn) stopBtn.addEventListener('click', stopAudio);
+}

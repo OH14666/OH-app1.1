@@ -46,10 +46,148 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: 0 12px;
   z-index: 90;
   border-bottom: 1px solid var(--border);
+  gap: 6px;
 }
+
+/* 网络状态指示器 */
+.net-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.net-status.offline { background: #fff3e0; color: #e65100; }
+.net-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4caf50;
+  flex-shrink: 0;
+}
+.net-status.offline .net-dot { background: #ff9800; }
+
+/* 名言卡片 */
+.quote-card {
+  margin-top: 12px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #fff0f5, #f0f7ff);
+  border-radius: 14px;
+  border-left: 3px solid var(--primary);
+}
+.quote-en {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+.quote-cn {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.quote-refresh {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 8px;
+}
+
+/* 音频播放器进度条 */
+.audio-player-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--primary-light);
+  border-radius: 12px;
+  margin: 10px 0;
+}
+.audio-play-pause, .audio-stop {
+  border: none;
+  background: var(--card);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.audio-progress-wrap {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.audio-progress {
+  height: 100%;
+  background: var(--primary);
+  width: 0%;
+  transition: width 0.2s;
+}
+.audio-time {
+  font-size: 11px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  min-width: 32px;
+}
+
+/* 单词例句+收藏 */
+.wcard-actions {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+.wcard-action-btn {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255,255,255,0.5);
+  color: var(--primary-dark);
+  cursor: pointer;
+}
+.wcard-action-btn.favorited { background: var(--primary); color: white; }
+.wcard-example {
+  margin-top: 6px;
+  padding: 8px 10px;
+  background: var(--bg);
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.6;
+  display: none;
+}
+.wcard-example.show { display: block; }
+
+/* 独白单句 */
+.mono-sentence {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.mono-sentence:hover { background: var(--primary-light); }
+.mono-sentence .speak-btn { flex-shrink: 0; margin-top: 2px; }
 
 .menu-toggle {
   width: 40px;
@@ -233,11 +371,46 @@ body {
 }
 
 .sidebar-footer {
-  padding: 16px;
+  padding: 12px 16px;
   text-align: center;
   font-size: 12px;
   color: var(--text-secondary);
   border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-export {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  border: none;
+  padding: 6px 14px;
+  border-radius: 14px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.btn-export:hover { background: var(--primary); color: white; }
+
+/* 知识历史 */
+.knowledge-history-item {
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  background: var(--primary-light);
+  border-radius: 10px;
+  font-size: 13px;
+}
+.knowledge-history-item .history-date {
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 4px;
+}
+.knowledge-history-item .history-text {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 12px;
 }
 
 /* 主内容区 */
