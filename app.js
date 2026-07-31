@@ -136,6 +136,84 @@ const ieltsPool = [
   { en: "variant", ph: "/ˈveəriənt/", cn: "变体；变种" }
 ];
 
+// 本地双语名言库（20条，离线兜底）
+const localBilingualQuotes = [
+  { en: "The only way to do great work is to love what you do.", cn: "成就伟大事业的唯一途径是热爱你所做的事。", author: "Steve Jobs" },
+  { en: "Life is what happens when you're busy making other plans.", cn: "生活就是当你忙于制定其他计划时所发生的事。", author: "John Lennon" },
+  { en: "The future belongs to those who believe in the beauty of their dreams.", cn: "未来属于那些相信自己梦想之美的人。", author: "Eleanor Roosevelt" },
+  { en: "It does not matter how slowly you go as long as you do not stop.", cn: "前进的速度有多慢并不重要，重要的是你不要停下来。", author: "Confucius" },
+  { en: "Success is not final, failure is not fatal: it is the courage to continue that counts.", cn: "成功不是终点，失败也非末日：重要的是继续前进的勇气。", author: "Winston Churchill" },
+  { en: "The best way to predict the future is to create it.", cn: "预测未来的最好方法就是亲手创造未来。", author: "Peter Drucker" },
+  { en: "In the middle of every difficulty lies opportunity.", cn: "每一个困难之中都蕴含着机遇。", author: "Albert Einstein" },
+  { en: "Don't watch the clock; do what it does. Keep going.", cn: "不要盯着时钟看，要像它一样不停地前进。", author: "Sam Levenson" },
+  { en: "Whether you think you can or you think you can't, you're right.", cn: "无论你认为自己能做到还是做不到，你都是对的。", author: "Henry Ford" },
+  { en: "The journey of a thousand miles begins with a single step.", cn: "千里之行，始于足下。", author: "Lao Tzu" },
+  { en: "To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.", cn: "在一个不断试图改变你的世界里做自己，是最了不起的成就。", author: "Ralph Waldo Emerson" },
+  { en: "What we think, we become.", cn: "我们想什么，我们就会变成什么。", author: "Buddha" },
+  { en: "The mind is everything. What you think you become.", cn: "思想决定一切。你想什么，你就成为什么。", author: "Buddha" },
+  { en: "An unexamined life is not worth living.", cn: "未经审视的生活不值得过。", author: "Socrates" },
+  { en: "Strive not to be a success, but rather to be of value.", cn: "努力成为有价值的人，而不是成功的人。", author: "Albert Einstein" },
+  { en: "The best revenge is massive success.", cn: "最好的报复就是巨大的成功。", author: "Frank Sinatra" },
+  { en: "I have not failed. I've just found 10,000 ways that won't work.", cn: "我没有失败，我只是发现了一万种行不通的方法。", author: "Thomas Edison" },
+  { en: "A person who never made a mistake never tried anything new.", cn: "从未犯过错误的人，从未尝试过新事物。", author: "Albert Einstein" },
+  { en: "The two most important days in your life are the day you are born and the day you find out why.", cn: "你生命中最重要的两天是你出生的那天和你找到人生目标的那天。", author: "Mark Twain" },
+  { en: "Don't count the days, make the days count.", cn: "不要数日子，要让每一天都有意义。", author: "Muhammad Ali" }
+];
+
+// 单词本地例句兜底（高频雅思词汇）
+const localWordExamples = {
+  "accommodate": "The hotel can accommodate up to 500 guests comfortably.",
+  "ambiguous": "His answer was ambiguous, leaving everyone unsure of his true intentions.",
+  "analyze": "We need to analyze the data carefully before drawing any conclusions.",
+  "approach": "A new approach to the problem is needed to break the deadlock.",
+  "assemble": "The team will assemble at the meeting point at 8 a.m.",
+  "beneficial": "Regular exercise is beneficial for both physical and mental health.",
+  "category": "Books are divided into several categories in the library.",
+  "circumstance": "Under the circumstances, we decided to cancel the outdoor event.",
+  "comprehensive": "The report provides a comprehensive analysis of the market trends.",
+  "concept": "The concept of artificial intelligence has evolved significantly over the years.",
+  "consequence": "The decision could have serious consequences for the company.",
+  "consistent": "She has been consistent in her efforts to improve the process.",
+  "contrast": "In contrast to last year, sales have increased by 20 percent.",
+  "contribute": "Everyone should contribute to protecting the environment.",
+  "criteria": "The selection criteria are clearly outlined in the guidelines.",
+  "demonstrate": "The experiment demonstrates the principle of conservation of energy.",
+  "derive": "The word 'science' derives from the Latin word 'scientia'.",
+  "deteriorate": "His health began to deteriorate rapidly after the accident.",
+  "emphasis": "The report places great emphasis on the importance of teamwork.",
+  "establish": "The company was established in 1985 and has grown steadily since.",
+  "evident": "It is evident that the new policy has had a positive impact.",
+  "fluctuate": "Stock prices fluctuate daily based on market conditions.",
+  "fundamental": "Freedom of speech is a fundamental human right.",
+  "generate": "The factory generates electricity using renewable energy sources.",
+  "hypothesis": "The scientist tested her hypothesis through a series of experiments.",
+  "illustrate": "The graph illustrates the relationship between temperature and pressure.",
+  "impact": "The new law will have a significant impact on small businesses.",
+  "incentive": "The company offers incentives to employees who meet their targets.",
+  "indicate": "The latest figures indicate a strong recovery in the economy.",
+  "inevitable": "Change is inevitable; the only question is how we respond to it.",
+  "interpret": "How we interpret events depends largely on our past experiences.",
+  "investigate": "The police are investigating the cause of the accident.",
+  "justify": "Nothing can justify such cruel treatment of innocent people.",
+  "maintenance": "Regular maintenance is essential to keep the equipment in good condition.",
+  "obstacle": "Lack of funding is the main obstacle to the project's success.",
+  "perspective": "Try to see it from a different perspective.",
+  "phenomenon": "This natural phenomenon occurs only once every few years.",
+  "potential": "The product has enormous potential in the international market.",
+  "predominant": "English is the predominant language in international business.",
+  "prevail": "Justice will prevail in the end, despite temporary setbacks.",
+  "proportion": "A large proportion of the population lives in urban areas.",
+  "relevant": "Please provide all relevant documents with your application.",
+  "reluctant": "He was reluctant to admit that he had made a mistake.",
+  "significant": "There has been a significant change in public opinion on this issue.",
+  "subsequent": "Subsequent events proved his earlier predictions to be correct.",
+  "sustain": "We need to develop sustainable energy sources for the future.",
+  "tendency": "There is a growing tendency for people to work from home.",
+  "trigger": "The announcement triggered a wave of protests across the country.",
+  "valid": "Your passport must be valid for at least six more months.",
+  "variant": "This variant of the virus is more contagious than the original."
+};
+
 // 口语句型（含生活例句）
 const speakingPool = [
   { title: "表达喜好", pattern: "I'm really into + n./v.-ing", cn: "我真的很喜欢……", example: "I'm really into hiking on weekends.", exCn: "我周末真的很喜欢去爬山。" },
@@ -334,18 +412,22 @@ const userAvatar = document.getElementById('userAvatar');
 const avatarEdit = document.getElementById('avatarEdit');
 const avatarInput = document.getElementById('avatarInput');
 
-// ========== 音频播放器（带进度条+暂停）==========
+// ========== 音频播放器（带进度条+暂停+多路降级）==========
 let engSpeed = 0.9;
 let currentAudio = null;
-let playAllQueue = [];
-let playAllIndex = 0;
-let playAllMode = false;
+let currentUtterance = null;
+let progressTimer = null;
 
-function getTTSUrl(text, lang = 'en') {
-  return `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${lang}&client=tw-ob`;
-}
+// 多个 TTS 端点，自动切换（按优先级排序）
+const TTS_ENDPOINTS = [
+  (text, lang) => `https://translate.google.com.hk/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${lang}&client=tw-ob`,
+  (text, lang) => `https://translate.google.cn/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${lang}&client=tw-ob`,
+  (text, lang) => `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${lang}&client=tw-ob`,
+  (text, lang) => `https://translate.google.com.tw/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${lang}&client=tw-ob`
+];
 
 function fmtAudioTime(sec) {
+  if (!isFinite(sec)) return '0:00';
   const m = Math.floor(sec / 60);
   const s = Math.floor(sec % 60);
   return m + ':' + (s < 10 ? '0' : '') + s;
@@ -358,75 +440,201 @@ function showAudioBar() {
 function hideAudioBar() {
   const bar = document.getElementById('audioPlayerBar');
   if (bar) bar.style.display = 'none';
+  if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
 }
 function updateAudioBar(audio) {
   const prog = document.getElementById('audioProgress');
   const time = document.getElementById('audioTime');
   const btn = document.getElementById('audioPlayPause');
-  if (audio.duration) {
+  if (audio.duration && audio.currentTime > 0) {
     const pct = (audio.currentTime / audio.duration) * 100;
-    if (prog) prog.style.width = pct + '%';
+    if (prog) prog.style.width = Math.min(100, pct) + '%';
     if (time) time.textContent = fmtAudioTime(audio.currentTime) + '/' + fmtAudioTime(audio.duration);
+  } else if (audio estimatedDuration) {
+    const pct = (audio.currentTime / audio.estimatedDuration) * 100;
+    if (prog) prog.style.width = Math.min(95, pct) + '%';
+    if (time) time.textContent = fmtAudioTime(audio.currentTime);
+  } else {
+    if (time) time.textContent = '加载中...';
   }
   if (btn) btn.textContent = audio.paused ? '▶️' : '⏸️';
 }
 
+// 核心播放函数（多端点+Web Speech降级）
 function playAudio(text, btnEl, rate, onEndedCb) {
   if (!text) return;
   stopAudio();
+  
   const speed = rate === undefined ? engSpeed : rate;
-  const url = getTTSUrl(text, 'en');
-  const audio = new Audio(url);
+  
+  // 方案1: 用TTS API（多端点自动切换）
+  tryPlayTTS(text, speed, btnEl, () => {
+    // TTS全部失败，降级到 Web Speech API
+    tryPlayWebSpeech(text, btnEl, speed, onEndedCb);
+  }, onEndedCb);
+}
+
+function tryPlayTTS(text, speed, btnEl, onAllFail, onEndedCb, attempt = 0) {
+  if (attempt >= TTS_ENDPOINTS.length) {
+    onAllFail && onAllFail();
+    return;
+  }
+  
+  const url = TTS_ENDPOINTS[attempt](text, 'en');
+  const audio = new Audio();
+  audio.src = url;
   audio.playbackRate = speed;
-  audio.crossOrigin = 'anonymous';
+  audio.volume = 1;
+  audio.preload = 'auto';
+  audio.timeoutId = null;
+  audio.attemptIndex = attempt;
   
   document.querySelectorAll('.speak-btn.playing').forEach(b => b.classList.remove('playing'));
   if (btnEl) btnEl.classList.add('playing');
   
   currentAudio = audio;
-  playAllMode = false;
   showAudioBar();
+  updateAudioBar({ duration: null, currentTime: 0, paused: false });
   
-  audio.addEventListener('timeupdate', () => updateAudioBar(audio));
-  audio.addEventListener('loadedmetadata', () => updateAudioBar(audio));
-  audio.addEventListener('play', () => updateAudioBar(audio));
-  audio.addEventListener('pause', () => updateAudioBar(audio));
+  // 设置超时（5秒），超时换下一个端点
+  audio.timeoutId = setTimeout(() => {
+    if (audio === currentAudio) {
+      audio.pause();
+      audio.src = '';
+      tryPlayTTS(text, speed, btnEl, onAllFail, onEndedCb, attempt + 1);
+    }
+  }, 5000);
   
-  audio.play().catch(() => {
-    if (btnEl) btnEl.classList.remove('playing');
-    showToast('音频加载失败，请检查网络');
-    hideAudioBar();
-  });
+  const onSuccess = () => {
+    clearTimeout(audio.timeoutId);
+  };
   
-  audio.onended = () => {
+  const onPlay = () => {
+    clearTimeout(audio.timeoutId);
+  };
+  
+  const onEnd = () => {
+    clearTimeout(audio.timeoutId);
     if (btnEl) btnEl.classList.remove('playing');
     if (onEndedCb) { onEndedCb(); }
     else { hideAudioBar(); }
   };
-  audio.onerror = () => {
+  
+  const onError = () => {
+    clearTimeout(audio.timeoutId);
+    if (audio === currentAudio) {
+      audio.pause();
+      audio.src = '';
+      // 尝试下一个端点
+      tryPlayTTS(text, speed, btnEl, onAllFail, onEndedCb, attempt + 1);
+    }
+  };
+  
+  audio.addEventListener('loadeddata', onSuccess);
+  audio.addEventListener('canplay', onPlay);
+  audio.addEventListener('play', onPlay);
+  audio.addEventListener('timeupdate', () => updateAudioBar(audio));
+  audio.addEventListener('ended', onEnd);
+  audio.addEventListener('error', onError);
+  
+  audio.play().catch(() => {
+    onError();
+  });
+}
+
+// 降级方案：使用浏览器 Web Speech API
+function tryPlayWebSpeech(text, btnEl, speed, onEndedCb) {
+  if (!('speechSynthesis' in window)) {
+    hideAudioBar();
     if (btnEl) btnEl.classList.remove('playing');
-    showToast('音频加载失败');
+    showToast('当前网络无法播放音频，请检查网络或使用最新版浏览器');
+    return;
+  }
+  
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = speed;
+  u.pitch = 1;
+  u.volume = 1;
+  
+  // 尝试选择英文语音
+  const voices = window.speechSynthesis.getVoices();
+  const enVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Female') || v.name.includes('Google') || v.name.includes('Samantha')));
+  if (enVoice) u.voice = enVoice;
+  
+  document.querySelectorAll('.speak-btn.playing').forEach(b => b.classList.remove('playing'));
+  if (btnEl) btnEl.classList.add('playing');
+  showAudioBar();
+  
+  // 估算播放时长（英文约每秒3-4个词）
+  const wordCount = text.split(/\s+/).length;
+  const estimatedDuration = Math.max(3, wordCount / (3 * speed));
+  
+  const fakeAudio = { duration: estimatedDuration, currentTime: 0, paused: false, estimatedDuration };
+  updateAudioBar(fakeAudio);
+  
+  // 进度条模拟
+  const startTime = Date.now();
+  progressTimer = setInterval(() => {
+    const elapsed = (Date.now() - startTime) / 1000;
+    fakeAudio.currentTime = Math.min(elapsed, estimatedDuration);
+    updateAudioBar(fakeAudio);
+    if (fakeAudio.currentTime >= estimatedDuration) {
+      clearInterval(progressTimer);
+      progressTimer = null;
+    }
+  }, 100);
+  
+  u.onend = () => {
+    if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
+    if (btnEl) btnEl.classList.remove('playing');
+    if (onEndedCb) { onEndedCb(); }
+    else { hideAudioBar(); }
+  };
+  u.onerror = () => {
+    if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
+    if (btnEl) btnEl.classList.remove('playing');
     hideAudioBar();
   };
+  
+  currentUtterance = u;
+  window.speechSynthesis.speak(u);
 }
 
 function stopAudio() {
   if (currentAudio) {
     currentAudio.pause();
+    currentAudio.src = '';
     currentAudio = null;
   }
-  playAllMode = false;
-  playAllQueue = [];
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  currentUtterance = null;
+  if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
   document.querySelectorAll('.speak-btn.playing').forEach(b => b.classList.remove('playing'));
   hideAudioBar();
 }
 
 function togglePlayPause() {
-  if (!currentAudio) return;
-  if (currentAudio.paused) {
-    currentAudio.play();
-  } else {
-    currentAudio.pause();
+  if (currentAudio) {
+    if (currentAudio.paused) {
+      currentAudio.play();
+    } else {
+      currentAudio.pause();
+    }
+    return;
+  }
+  if ('speechSynthesis' in window && window.speechSynthesis.speaking) {
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+      const btn = document.getElementById('audioPlayPause');
+      if (btn) btn.textContent = '⏸️';
+    } else {
+      window.speechSynthesis.pause();
+      const btn = document.getElementById('audioPlayPause');
+      if (btn) btn.textContent = '▶️';
+    }
+    return;
   }
 }
 
@@ -464,10 +672,16 @@ async function fetchOnlineQuote() {
   }
 }
 
-// 联网获取单词例句
+// 联网获取单词例句（带本地兜底）
 async function fetchWordExample(word) {
+  const lower = word.toLowerCase();
+  // 先尝试本地兜底
+  if (localWordExamples[lower]) {
+    return localWordExamples[lower];
+  }
+  // 再尝试联网
   try {
-    const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word.toLowerCase())}`);
+    const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(lower)}`);
     if (!res.ok) return null;
     const data = await res.json();
     for (const entry of data) {
@@ -1005,20 +1219,136 @@ function initEnglish() {
     // 拆分为单句，每句配一个播放按钮
     const sentences = enText.match(/[^.!?]+[.!?]+/g) || [enText];
     const cnSentences = cnText ? (cnText.match(/[^。！？]+[。！？]+/g) || [cnText]) : [];
+    
+    // 计算总词数
+    const totalWords = enText.split(/\s+/).length;
+    
     mono.innerHTML = `
-      <div class="mono-en">
+      <div style="margin-bottom:10px;font-size:12px;color:var(--text-secondary)">
+        📊 共 ${sentences.length} 句 · ${totalWords} 词
+        <button class="btn btn-secondary" id="monoPlayAll" style="margin-left:8px;padding:4px 10px;font-size:11px">▶️ 连读全文</button>
+      </div>
+      <div class="mono-en" id="monoSentences">
         ${sentences.map((s, i) => `
-          <div class="mono-sentence">
-            <button class="speak-btn" data-spe="${encodeURIComponent(s.trim())}">🔊</button>
-            <span>${s.trim()}</span>
+          <div class="mono-sentence" data-idx="${i}">
+            <button class="speak-btn" data-spe="${encodeURIComponent(s.trim())}" data-idx="${i}" title="点击播放此句">🔊</button>
+            <span class="mono-sentence-en">${s.trim()}</span>
           </div>
-          ${cnSentences[i] ? `<div style="margin-left:26px;font-size:12px;color:var(--text-secondary);margin-bottom:8px">${cnSentences[i].trim()}</div>` : ''}
+          ${cnSentences[i] ? `<div class="mono-sentence-cn">${cnSentences[i].trim()}</div>` : ''}
         `).join('')}
       </div>
-      <div style="margin-top:8px">
-        <button class="speak-btn" data-spe="${encodeURIComponent(enText)}" style="font-size:12px">🔊 播放全文</button>
-      </div>
     `;
+    
+    // 绑定整段播放
+    const playAllBtn = document.getElementById('monoPlayAll');
+    if (playAllBtn) {
+      playAllBtn.addEventListener('click', () => {
+        playMonologueAll(sentences, cnSentences);
+      });
+    }
+  }
+  
+  // 独白整段连读（依次播放每一句）
+  function playMonologueAll(sentences, cnSentences) {
+    let idx = 0;
+    const sentenceEls = document.querySelectorAll('#monoSentences .mono-sentence');
+    
+    function playNext() {
+      if (idx >= sentences.length) {
+        stopAudio();
+        showToast('独白播放完成');
+        return;
+      }
+      
+      // 高亮当前句
+      sentenceEls.forEach((el, i) => {
+        el.style.background = i === idx ? 'var(--primary-light)' : '';
+      });
+      
+      const targetBtn = sentenceEls[idx] ? sentenceEls[idx].querySelector('.speak-btn') : null;
+      playAudio(sentences[idx].trim(), targetBtn, engSpeed, () => {
+        idx++;
+        setTimeout(playNext, 300);
+      });
+    }
+    
+    playNext();
+  }
+
+  function renderFavorites() {
+    const grid = document.getElementById('favoritesGrid');
+    const stats = document.getElementById('favoritesStats');
+    const favs = getFavorites();
+    
+    if (!favs.length) {
+      if (grid) grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 20px;color:var(--text-secondary);font-size:14px">
+        <div style="font-size:48px;margin-bottom:12px">📚</div>
+        <p>还没有收藏的单词</p>
+        <p style="font-size:12px;margin-top:6px">去「单词」标签页点击☆收藏单词，随时回来复习吧！</p>
+      </div>`;
+      if (stats) stats.innerHTML = '';
+      return;
+    }
+    
+    if (stats) {
+      const lastReview = localStorage.getItem('cc_fav_review_time');
+      const lastText = lastReview ? new Date(parseInt(lastReview)).toLocaleDateString('zh-CN') : '从未';
+      stats.innerHTML = `<div style="background:var(--bg);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--text-secondary)">
+        📖 共收藏 <strong style="color:var(--primary-dark)">${favs.length}</strong> 个单词 · 上次复习：<strong>${lastText}</strong>
+        <button class="btn btn-secondary" id="startFavReview" style="margin-left:10px;padding:6px 12px;font-size:12px">🎯 开始复习</button>
+        <button class="btn btn-ghost" id="clearFavs" style="margin-left:6px;padding:6px 12px;font-size:12px">🗑️ 清空</button>
+      </div>`;
+      const startBtn = document.getElementById('startFavReview');
+      if (startBtn) startBtn.addEventListener('click', () => {
+        localStorage.setItem('cc_fav_review_time', Date.now().toString());
+        showToast('复习模式：点击卡片翻面，点击🔊朗读');
+      });
+      const clearBtn = document.getElementById('clearFavs');
+      if (clearBtn) clearBtn.addEventListener('click', () => {
+        if (confirm('确定要清空所有收藏的单词吗？')) {
+          localStorage.setItem('cc_word_favorites', '[]');
+          renderFavorites();
+          showToast('已清空收藏');
+        }
+      });
+    }
+    
+    if (grid) {
+      grid.innerHTML = favs.map(w => `
+        <div class="wcard" data-revealed="true" data-en="${encodeURIComponent(w.en)}" data-ph="${encodeURIComponent(w.ph)}" data-cn="${encodeURIComponent(w.cn)}">
+          <div class="wcard-en">${w.en}</div>
+          <div class="wcard-ph">${w.ph || ''}</div>
+          <div class="wcard-cn-wrap">
+            <div class="wcard-cn">${w.cn}</div>
+            <div class="wcard-cn-cover">点击查看释义</div>
+          </div>
+          <button class="speak-btn" data-spe="${encodeURIComponent(w.en)}">🔊</button>
+          <div class="wcard-actions">
+            <button class="wcard-action-btn fav-btn favorited" data-fav-en="${encodeURIComponent(w.en)}" data-fav-ph="${encodeURIComponent(w.ph)}" data-fav-cn="${encodeURIComponent(w.cn)}">★ 取消收藏</button>
+          </div>
+        </div>
+      `).join('');
+      
+      grid.querySelectorAll('.wcard').forEach(card => {
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('.speak-btn') || e.target.closest('.wcard-action-btn') || e.target.closest('.wcard-example')) return;
+          card.dataset.revealed = card.dataset.revealed === 'true' ? 'false' : 'true';
+        });
+      });
+      
+      // 取消收藏按钮
+      grid.querySelectorAll('.fav-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const en = decodeURIComponent(btn.dataset.favEn);
+          const ph = decodeURIComponent(btn.dataset.favPh);
+          const cn = decodeURIComponent(btn.dataset.favCn);
+          toggleFavorite(en, ph, cn);
+          renderFavorites();
+          showToast('已取消收藏');
+        });
+      });
+    }
   }
 
   function renderAll() {
@@ -1031,6 +1361,7 @@ function initEnglish() {
     renderTed(data.ted);
     renderShadowing(data.shadowing);
     renderMonologue(data.monologue || '');
+    renderFavorites();
     renderCalendar();
     renderHistory();
     updateHomeStats();
@@ -1055,6 +1386,8 @@ function initEnglish() {
   document.getElementById('speakingRefresh').addEventListener('click', () => { refreshSection('speaking'); });
   document.getElementById('tedRefresh').addEventListener('click', () => { refreshSection('ted'); });
   document.getElementById('shadowingRefresh').addEventListener('click', () => { refreshSection('shadowing'); });
+  const favRefreshBtn = document.getElementById('favRefresh');
+  if (favRefreshBtn) favRefreshBtn.addEventListener('click', () => { renderFavorites(); showToast('收藏库已刷新'); });
 
   function refreshSection(section) {
     const k = 'cc_eng_' + fmtDate(state.currentDate);
@@ -1157,22 +1490,35 @@ function initEnglish() {
     });
   }
 
-  // 名言获取
+  // 名言获取（双语显示）
   async function loadQuote() {
     const enEl = document.getElementById('engQuoteEn');
     const cnEl = document.getElementById('engQuoteCn');
     if (!enEl) return;
     enEl.textContent = '加载中...';
     cnEl.textContent = '';
-    const quote = await fetchOnlineQuote();
-    if (quote) {
-      enEl.textContent = `"${quote.en}"`;
-      cnEl.textContent = `— ${quote.author}`;
+    
+    // 优先使用本地双语名言
+    const localQuote = localBilingualQuotes[Math.floor(Math.random() * localBilingualQuotes.length)];
+    
+    // 尝试联网获取英文名言
+    const onlineQuote = await fetchOnlineQuote();
+    
+    if (onlineQuote && onlineQuote.en) {
+      // 联网成功：显示英文名言 + 本地对应翻译或本地名言
+      enEl.textContent = `"${onlineQuote.en}"`;
+      // 如果联网名言有作者，附加到中文行
+      if (onlineQuote.author) {
+        // 尝试用本地名言的中文（如果英文匹配），否则显示作者信息
+        const matchedLocal = localBilingualQuotes.find(q => q.en === onlineQuote.en);
+        cnEl.textContent = matchedLocal ? matchedLocal.cn : `— ${onlineQuote.author}`;
+      } else {
+        cnEl.textContent = '';
+      }
     } else {
-      // 离线兜底
-      const fallback = knowledgePool[Math.floor(Math.random() * knowledgePool.length)];
-      enEl.textContent = fallback.title;
-      cnEl.textContent = fallback.content;
+      // 离线兜底：使用本地双语名言
+      enEl.textContent = `"${localQuote.en}"`;
+      cnEl.textContent = `${localQuote.cn} — ${localQuote.author}`;
     }
   }
   const quoteRefreshBtn = document.getElementById('engQuoteRefresh');

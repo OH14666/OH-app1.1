@@ -205,6 +205,7 @@
         <button class="tab-btn" data-tab="speaking">口语</button>
         <button class="tab-btn" data-tab="ted">TED</button>
         <button class="tab-btn" data-tab="shadowing">影子跟读</button>
+        <button class="tab-btn" data-tab="favorites">收藏库</button>
       </div>
 
       <div class="english-content" id="englishContent">
@@ -264,6 +265,16 @@
             </div>
             <div class="mono-text" id="monoText"></div>
           </div>
+        </div>
+
+        <div class="english-section" data-section="favorites">
+          <div class="section-toolbar">
+            <h3 class="english-section-title">⭐ 我的收藏库</h3>
+            <button class="btn-mini-refresh" id="favRefresh">刷新</button>
+          </div>
+          <p class="section-hint">点击卡片翻转查看释义 · 点击🔊朗读 · 支持批量复习</p>
+          <div class="favorites-stats" id="favoritesStats" style="margin-bottom:12px"></div>
+          <div class="word-grid-16" id="favoritesGrid"></div>
         </div>
       </div>
 

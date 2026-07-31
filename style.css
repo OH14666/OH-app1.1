@@ -105,16 +105,7 @@ body {
   padding: 2px 8px;
 }
 
-/* 音频播放器进度条 */
-.audio-player-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  background: var(--primary-light);
-  border-radius: 12px;
-  margin: 10px 0;
-}
+/* 音频播放器按钮 */
 .audio-play-pause, .audio-stop {
   border: none;
   background: var(--card);
@@ -127,25 +118,18 @@ body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.15s;
 }
-.audio-progress-wrap {
-  flex: 1;
-  height: 4px;
-  background: rgba(255,255,255,0.6);
-  border-radius: 2px;
-  overflow: hidden;
-}
-.audio-progress {
-  height: 100%;
-  background: var(--primary);
-  width: 0%;
-  transition: width 0.2s;
+.audio-play-pause:active, .audio-stop:active {
+  transform: scale(0.92);
 }
 .audio-time {
   font-size: 11px;
   color: var(--text-secondary);
   flex-shrink: 0;
   min-width: 32px;
+  text-align: center;
 }
 
 /* 单词例句+收藏 */
@@ -180,14 +164,34 @@ body {
 .mono-sentence {
   display: flex;
   align-items: flex-start;
-  gap: 6px;
+  gap: 8px;
   margin-bottom: 8px;
-  padding: 6px 8px;
-  border-radius: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
   transition: background 0.15s;
+  cursor: pointer;
 }
 .mono-sentence:hover { background: var(--primary-light); }
+.mono-sentence.active { background: var(--primary-light); }
 .mono-sentence .speak-btn { flex-shrink: 0; margin-top: 2px; }
+.mono-sentence-en {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text);
+  flex: 1;
+}
+.mono-sentence-cn {
+  margin-left: 34px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 8px;
+  padding-left: 10px;
+  border-left: 2px solid var(--primary-light);
+}
+.mono-sentence.en-only {
+  padding-bottom: 4px;
+}
 
 .menu-toggle {
   width: 40px;
@@ -1432,6 +1436,42 @@ body {
   color: var(--primary-dark);
   min-width: 40px;
   text-align: right;
+}
+
+/* 收藏库统计 */
+.favorites-stats {
+  display: block;
+}
+.favorites-stats strong {
+  color: var(--primary-dark);
+}
+
+/* 音频播放器进度条优化 */
+.audio-player-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, var(--primary-light), #fff);
+  border-radius: 14px;
+  margin: 12px 0;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border);
+}
+.audio-progress-wrap {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+}
+.audio-progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  width: 0%;
+  transition: width 0.15s linear;
+  border-radius: 3px;
 }
 
 /* 独白生成器 */
