@@ -450,7 +450,7 @@ function updateAudioBar(audio) {
     const pct = (audio.currentTime / audio.duration) * 100;
     if (prog) prog.style.width = Math.min(100, pct) + '%';
     if (time) time.textContent = fmtAudioTime(audio.currentTime) + '/' + fmtAudioTime(audio.duration);
-  } else if (audio estimatedDuration) {
+  } else if (audio.estimatedDuration) {
     const pct = (audio.currentTime / audio.estimatedDuration) * 100;
     if (prog) prog.style.width = Math.min(95, pct) + '%';
     if (time) time.textContent = fmtAudioTime(audio.currentTime);
@@ -1378,6 +1378,8 @@ function initEnglish() {
       document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
       document.querySelectorAll('.english-section').forEach(s => s.classList.toggle('active', s.dataset.section === target));
+      // 切换到收藏库时刷新数据
+      if (target === 'favorites') renderFavorites();
     });
   });
 
