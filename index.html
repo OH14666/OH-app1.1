@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="icon" type="image/png" href="favicon-32x32.png" />
   <title>创作指挥中心</title>
-  <link rel="stylesheet" href="style.css?v=2.4.1" />
+  <link rel="stylesheet" href="style.css?v=2.7.0" />
 </head>
 <body>
   <!-- 移动端顶部栏 -->
@@ -153,6 +153,20 @@
         <h3>随机选题生成器</h3>
         <div class="topic-box" id="topicBox">点击按钮获取今日选题</div>
         <button class="btn btn-primary" id="generateTopic">生成选题</button>
+      </div>
+      <div class="section-card" id="topicCopyCard" style="display:none">
+        <h4 style="margin:0 0 10px;color:var(--primary)">📝 选题文案生成</h4>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+          <label style="font-size:13px;color:var(--text-secondary);white-space:nowrap">字数：</label>
+          <input type="number" id="topicCopyWordCount" value="80" min="50" max="100" style="width:70px;padding:4px 8px;border-radius:8px;border:1px solid var(--border);font-size:14px" />
+          <span style="font-size:12px;color:var(--text-secondary)">（50-100字可自定义）</span>
+          <button class="btn btn-secondary" id="regenerateCopyBtn" style="font-size:13px;padding:4px 12px">🔄 换一版</button>
+        </div>
+        <div id="topicCopyResult" style="background:var(--bg);border-radius:10px;padding:12px 14px;font-size:14px;line-height:1.7;color:var(--text);min-height:60px"></div>
+        <div style="margin-top:10px;display:flex;gap:8px">
+          <button class="btn btn-primary" id="copyTopicText" style="font-size:13px">📋 复制文案</button>
+          <button class="btn btn-secondary" id="copyTopicToTask" style="font-size:13px">加入任务</button>
+        </div>
       </div>
     </section>
 
@@ -350,8 +364,18 @@
         <p class="section-hint" id="todoModeHint" style="margin-top:8px">今日待办会自动延续到明天，每天独立互不影响</p>
       </div>
       <div class="section-card">
+        <h4 style="margin:0 0 10px;color:var(--primary)">🔁 每日待办</h4>
+        <p style="font-size:12px;color:var(--text-secondary);margin:0 0 10px">每天固定要做的事，勾选状态每天重置</p>
         <div class="todo-input-wrap">
-          <input type="text" id="todoInput" placeholder="添加新待办..." />
+          <input type="text" id="dailyTodoInput" placeholder="添加每日固定待办..." />
+          <button class="btn btn-primary" id="addDailyTodo">+</button>
+        </div>
+        <ul class="todo-list" id="dailyTodoList"></ul>
+      </div>
+      <div class="section-card">
+        <h4 style="margin:0 0 10px;color:var(--primary)">📌 今日待办</h4>
+        <div class="todo-input-wrap">
+          <input type="text" id="todoInput" placeholder="添加今日待办..." />
           <button class="btn btn-primary" id="addTodo">+</button>
         </div>
         <ul class="todo-list" id="todoList"></ul>
@@ -386,6 +410,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=2.4.2"></script>
+  <script src="app.js?v=2.7.0"></script>
 </body>
 </html>

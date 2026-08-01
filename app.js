@@ -40,46 +40,36 @@ function shuffle(arr) {
 
 // ===================== 数据 =====================
 const recreationData = [
-  {
-    title: "源头厂探店：一副耳环的诞生",
-    tags: [{ text: "抖音", cls: "douyin" }, { text: "大爆", cls: "hot" }, { text: "饰品", cls: "" }],
-    idea: "你家里就是饰品源头厂，生产全过程是别人没有的信任背书。",
-    adaptedTitle: "一副耳环从我家作坊到你手上",
-    xhsTitle: "1688源头厂探访｜耳环制作全过程",
-    plan: "机位：手持跟拍工作台；场景：家里作坊；节奏：中速，突出手工细节特写。"
-  },
-  {
-    title: "戴夸张耳环的妆容搭配",
-    tags: [{ text: "小红书", cls: "xhs" }, { text: "中爆", cls: "hot" }, { text: "化妆", cls: "" }],
-    idea: "你是饰品源头，耳环+妆容联动正好种草自家货。",
-    adaptedTitle: "夸张耳环配什么妆不翻车",
-    xhsTitle: "耳环×妆容搭配｜源头厂女孩的私藏",
-    plan: "机位：镜子前；场景：家里；节奏：对比式，每款耳环+妆容8秒。"
-  },
-  {
-    title: "车模收藏玩家的开箱日常",
-    tags: [{ text: "B站", cls: "bilibili" }, { text: "中爆", cls: "hot" }, { text: "开箱", cls: "" }],
-    idea: "小众收藏垂类粉丝粘性高，可结合故事+展示打造系列内容。",
-    adaptedTitle: "花一个月工资买的车模，到底值不值？",
-    xhsTitle: "男友的车模墙｜男生快乐原来这么简单",
-    plan: "机位：桌面俯拍+侧面；场景：收藏柜前；节奏：开场悬念，中段细节，结尾金句。"
-  },
-  {
-    title: "职场妈妈的清晨routine",
-    tags: [{ text: "小红书", cls: "xhs" }, { text: "大爆", cls: "hot" }, { text: "vlog", cls: "" }],
-    idea: "真实、有共鸣的职场妈妈日常容易引发评论区互动。",
-    adaptedTitle: "6点起床的职场妈妈，早上到底在忙什么",
-    xhsTitle: "30+职场妈妈晨间routine｜自律但不焦虑",
-    plan: "机位：固定机位+手持；场景：卧室、厨房、卫生间；节奏：轻快节奏，配治愈音乐。"
-  },
-  {
-    title: "普通人如何穿出高级感",
-    tags: [{ text: "抖音", cls: "douyin" }, { text: "大爆", cls: "hot" }, { text: "穿搭", cls: "" }],
-    idea: "穿搭干货+前后对比，易获得收藏和转发。",
-    adaptedTitle: "3个技巧，让便宜衣服看起来很贵",
-    xhsTitle: "低成本高级感穿搭｜这3点很重要",
-    plan: "机位：全身镜前；场景：卧室；节奏：前后对比，重点突出配色和版型。"
-  }
+  { title: "源头厂探店：一副耳环的诞生", tags: [{ text: "抖音", cls: "douyin" }, { text: "大爆", cls: "hot" }, { text: "饰品", cls: "" }], idea: "你家里就是饰品源头厂，生产全过程是别人没有的信任背书。", adaptedTitle: "一副耳环从我家作坊到你手上", xhsTitle: "1688源头厂探访｜耳环制作全过程", plan: "机位：手持跟拍工作台；场景：家里作坊；节奏：中速，突出手工细节特写。" },
+  { title: "戴夸张耳环的妆容搭配", tags: [{ text: "小红书", cls: "xhs" }, { text: "中爆", cls: "hot" }, { text: "化妆", cls: "" }], idea: "你是饰品源头，耳环+妆容联动正好种草自家货。", adaptedTitle: "夸张耳环配什么妆不翻车", xhsTitle: "耳环×妆容搭配｜源头厂女孩的私藏", plan: "机位：镜子前；场景：家里；节奏：对比式，每款耳环+妆容8秒。" },
+  { title: "车模收藏玩家的开箱日常", tags: [{ text: "B站", cls: "bilibili" }, { text: "中爆", cls: "hot" }, { text: "开箱", cls: "" }], idea: "小众收藏垂类粉丝粘性高，可结合故事+展示打造系列内容。", adaptedTitle: "花一个月工资买的车模，到底值不值？", xhsTitle: "男友的车模墙｜男生快乐原来这么简单", plan: "机位：桌面俯拍+侧面；场景：收藏柜前；节奏：开场悬念，中段细节，结尾金句。" },
+  { title: "职场妈妈的清晨routine", tags: [{ text: "小红书", cls: "xhs" }, { text: "大爆", cls: "hot" }, { text: "vlog", cls: "" }], idea: "真实、有共鸣的职场妈妈日常容易引发评论区互动。", adaptedTitle: "6点起床的职场妈妈，早上到底在忙什么", xhsTitle: "30+职场妈妈晨间routine｜自律但不焦虑", plan: "机位：固定机位+手持；场景：卧室、厨房、卫生间；节奏：轻快节奏，配治愈音乐。" },
+  { title: "普通人如何穿出高级感", tags: [{ text: "抖音", cls: "douyin" }, { text: "大爆", cls: "hot" }, { text: "穿搭", cls: "" }], idea: "穿搭干货+前后对比，易获得收藏和转发。", adaptedTitle: "3个技巧，让便宜衣服看起来很贵", xhsTitle: "低成本高级感穿搭｜这3点很重要", plan: "机位：全身镜前；场景：卧室；节奏：前后对比，重点突出配色和版型。" },
+  { title: "出租屋改造日记：花500元焕新卧室", tags: [{ text: "小红书", cls: "xhs" }, { text: "大爆", cls: "hot" }, { text: "家居", cls: "" }], idea: "低成本改造类内容自带流量属性，过程感强易出爆款。", adaptedTitle: "500元改造出租屋卧室，房东看了都惊了", xhsTitle: "出租屋改造｜500元卧室大变身", plan: "机位：固定延时+手持特写；场景：卧室；节奏：改造前→过程→成果三段式。" },
+  { title: "一个人吃遍整条小吃街", tags: [{ text: "抖音", cls: "douyin" }, { text: "大爆", cls: "hot" }, { text: "美食", cls: "" }], idea: "探店吃播结合街头烟火气，完播率高。", adaptedTitle: "挑战一个人吃完整条小吃街，结局撑哭了", xhsTitle: "小吃街探店｜一个人能吃多少家", plan: "机位：手持+桌面；场景：街头；节奏：快剪辑，每家店10-15秒。" },
+  { title: "100天自律打卡变美全过程", tags: [{ text: "小红书", cls: "xhs" }, { text: "大爆", cls: "hot" }, { text: "自律", cls: "" }], idea: "长期打卡系列内容粉丝粘性极高，容易形成追更习惯。", adaptedTitle: "坚持100天自律，我变成了另一个人", xhsTitle: "100天自律变美打卡｜第1天vs第100天", plan: "机位：固定机位对比；场景：家里；节奏：每周1期，对比+感悟。" },
+  { title: "手账排版教程：让笔记变好看", tags: [{ text: "小红书", cls: "xhs" }, { text: "中爆", cls: "hot" }, { text: "手账", cls: "" }], idea: "手账类内容受众精准，教程干货易获收藏。", adaptedTitle: "让你的手账变好看的5个排版技巧", xhsTitle: "手账排版教程｜新手也能画出高级感", plan: "机位：俯拍桌面；场景：书桌；节奏：慢速特写，配轻音乐。" },
+  { title: "用100元挑战做一桌年夜饭", tags: [{ text: "抖音", cls: "douyin" }, { text: "大爆", cls: "hot" }, { text: "美食", cls: "" }], idea: "挑战类美食内容自带悬念，完播率和互动率极高。", adaptedTitle: "100元做了一桌年夜饭，全家都说好吃", xhsTitle: "100元挑战年夜饭｜6菜1汤全搞定", plan: "机位：厨房手持+餐桌俯拍；场景：厨房；节奏：采购→做菜→成品三段式。" },
+  { title: "公司通勤OOTD一周不重样", tags: [{ text: "小红书", cls: "xhs" }, { text: "中爆", cls: "hot" }, { text: "穿搭", cls: "" }], idea: "通勤穿搭是高频搜索词，系列内容容易涨粉。", adaptedTitle: "打工人通勤穿搭7天不重样", xhsTitle: "一周通勤OOTD｜简约又高级", plan: "机位：全身镜；场景：玄关/卧室；节奏：每天1套，每套15秒。" },
+  { title: "自制饮品：复刻网红奶茶", tags: [{ text: "抖音", cls: "douyin" }, { text: "中爆", cls: "hot" }, { text: "美食", cls: "" }], idea: "复刻网红饮品成本低、操作简单，易引发互动。", adaptedTitle: "在家复刻网红奶茶，3块钱成本比店里的好喝", xhsTitle: "自制奶茶｜复刻网红配方太好喝了", plan: "机位：厨房桌面；场景：家里；节奏：材料→制作→试喝三段。" },
+  { title: "断舍离100天：我扔了多少东西", tags: [{ text: "小红书", cls: "xhs" }, { text: "中爆", cls: "hot" }, { text: "生活", cls: "" }], idea: "断舍离话题自带情绪共鸣，容易引发评论讨论。", adaptedTitle: "断舍离100天，我扔了200件东西", xhsTitle: "极简生活｜断舍离让我轻松了", plan: "机位：手持；场景：家里各房间；节奏：分类展示，每类10秒。" },
+  { title: "新手养猫第一周全记录", tags: [{ text: "B站", cls: "bilibili" }, { text: "中爆", cls: "hot" }, { text: "宠物", cls: "" }], idea: "宠物内容天然吸粉，新手视角代入感强。", adaptedTitle: "新手养猫第一周，我崩溃了3次", xhsTitle: "新手养猫日记｜第一周翻车实录", plan: "机位：固定+手持；场景：家里；节奏：按天记录，每条2-3个片段。" },
+  { title: "用手机拍出电影感日常vlog", tags: [{ text: "抖音", cls: "douyin" }, { text: "大爆", cls: "hot" }, { text: "教程", cls: "" }], idea: "手机摄影教程类内容收藏率高，实用性强。", adaptedTitle: "手机拍日常vlog，3招拍出电影感", xhsTitle: "手机vlog教程｜电影感调色+运镜", plan: "机位：手持演示；场景：户外+家里；节奏：技巧拆解，每招30秒。" },
+  { title: "周末郊游野餐布置分享", tags: [{ text: "小红书", cls: "xhs" }, { text: "中爆", cls: "hot" }, { text: "生活", cls: "" }], idea: "野餐是季节性爆款话题，场景美易出图。", adaptedTitle: "周末野餐布置大公开，朋友圈都在问", xhsTitle: "野餐布置分享｜出片率100%", plan: "机位：手持+延时；场景：公园草地；节奏：布置→成品→美食三段。" },
+  { title: "30天马甲线挑战实录", tags: [{ text: "抖音", cls: "douyin" }, { text: "大爆", cls: "hot" }, { text: "健身", cls: "" }], idea: "健身打卡类内容粉丝粘性高，前后对比是天然爆点。", adaptedTitle: "30天马甲线挑战，第15天就有效果了", xhsTitle: "30天马甲线｜居家跟练打卡", plan: "机位：固定全身；场景：家里；节奏：按天对比，重点突出变化。" },
+  { title: "把旧衣服改造成新款", tags: [{ text: "小红书", cls: "xhs" }, { text: "中爆", cls: "hot" }, { text: "手工", cls: "" }], idea: "旧衣改造话题自带环保属性和创意感，易获推荐。", adaptedTitle: "把旧T恤改成新款，省了300块", xhsTitle: "旧衣改造｜让旧衣服起死回生", plan: "机位：桌面俯拍；场景：家里；节奏：旧衣→裁剪→成品→试穿。" },
+  { title: "一人食晚餐vlog", tags: [{ text: "抖音", cls: "douyin" }, { text: "中爆", cls: "hot" }, { text: "vlog", cls: "" }], idea: "一人食话题精准触达独居人群，治愈感强。", adaptedTitle: "一个人的晚餐也可以很认真", xhsTitle: "一人食vlog｜今天也好好吃饭", plan: "机位：厨房手持+餐桌；场景：家里；节奏：做菜→摆盘→吃饭，慢节奏。" },
+  { title: "整理衣柜大改造", tags: [{ text: "小红书", cls: "xhs" }, { text: "中爆", cls: "hot" }, { text: "收纳", cls: "" }], idea: "收纳整理类内容完播率高，前后对比是天然爽点。", adaptedTitle: "整理衣柜后，我发现多了这么多空间", xhsTitle: "衣柜整理｜从混乱到治愈", plan: "机位：固定+延时；场景：卧室衣柜；节奏：整理前→分类→折叠→成果。" },
+  { title: "新手第一次做面包翻车了吗", tags: [{ text: "B站", cls: "bilibili" }, { text: "中爆", cls: "hot" }, { text: "美食", cls: "" }], idea: "新手烘焙翻车内容自带真实感和话题性。", adaptedTitle: "第一次做面包，结果竟然出乎意料", xhsTitle: "烘焙新手｜第一次做面包全记录", plan: "机位：厨房桌面+手持；场景：厨房；节奏：和面→发酵→烘烤→试吃。" },
+  { title: "养花日记：从种子到开花", tags: [{ text: "小红书", cls: "xhs" }, { text: "中爆", cls: "hot" }, { text: "植物", cls: "" }], idea: "养花类内容受众精准，延时拍摄开花瞬间是天然爆点。", adaptedTitle: "从种子到开花，我等了60天", xhsTitle: "养花日记｜从播种到开花全记录", plan: "机位：固定延时；场景：阳台；节奏：按周更新，开花瞬间是高潮。" },
+  { title: "下班后3小时如何利用", tags: [{ text: "抖音", cls: "douyin" }, { text: "大爆", cls: "hot" }, { text: "自律", cls: "" }], idea: "时间管理话题精准切中上班族痛点，互动率高。", adaptedTitle: "下班后3小时，我做了这些事", xhsTitle: "下班后的3小时｜普通人也能逆袭", plan: "机位：手持+固定；场景：家里各处；节奏：时间轴式，每小时一段。" },
+  { title: "沉浸式护肤ASMR", tags: [{ text: "小红书", cls: "xhs" }, { text: "中爆", cls: "hot" }, { text: "护肤", cls: "" }], idea: "ASMR护肤内容沉浸感强，完播率和收藏率极高。", adaptedTitle: "沉浸式护肤，看完想马上睡觉", xhsTitle: "ASMR护肤｜沉浸式晚间护肤routine", plan: "机位：近距特写；场景：卫生间；节奏：慢节奏，无BGM，突出声音。" },
+  { title: "翻新二手淘来的旧家具", tags: [{ text: "B站", cls: "bilibili" }, { text: "中爆", cls: "hot" }, { text: "手工", cls: "" }], idea: "旧物翻新有过程感和成就感，容易引发收藏。", adaptedTitle: "二手市场50块淘的柜子，翻新后值500", xhsTitle: "旧家具翻新｜50元淘到宝改造全过程", plan: "机位：手持+延时；场景：阳台/车库；节奏：淘货→打磨→上漆→成品。" },
+  { title: "一周穿搭不重样挑战", tags: [{ text: "抖音", cls: "douyin" }, { text: "中爆", cls: "hot" }, { text: "穿搭", cls: "" }], idea: "穿搭挑战系列内容粉丝粘性高，容易形成追更。", adaptedTitle: "7天穿搭不重样，第5套最受欢迎", xhsTitle: "一周穿搭挑战｜胶囊衣橱搭配法", plan: "机位：全身镜；场景：卧室；节奏：每天1套+搭配思路。" },
+  { title: "记录宠物的一天", tags: [{ text: "抖音", cls: "douyin" }, { text: "大爆", cls: "hot" }, { text: "宠物", cls: "" }], idea: "宠物视角内容天然有趣，完播率极高。", adaptedTitle: "我家的猫一天都在干什么", xhsTitle: "猫咪的一天｜铲屎官偷窥日记", plan: "机位：固定+跟拍；场景：家里各处；节奏：按时间线，配字幕和音效。" },
+  { title: "自制手机壳教程", tags: [{ text: "小红书", cls: "xhs" }, { text: "中爆", cls: "hot" }, { text: "手工", cls: "" }], idea: "手工DIY类内容教程属性强，易获收藏。", adaptedTitle: "自制手机壳，成本5块比买的还好看", xhsTitle: "DIY手机壳｜手残党也能做", plan: "机位：桌面俯拍；场景：书桌；节奏：材料→制作→成品展示。" },
+  { title: "100元逛超市能买多少东西", tags: [{ text: "抖音", cls: "douyin" }, { text: "大爆", cls: "hot" }, { text: "生活", cls: "" }], idea: "超市挑战类内容自带悬念和话题性，完播率高。", adaptedTitle: "100元在超市能买多少东西？结局没想到", xhsTitle: "100元超市大挑战｜物价涨了多少", plan: "机位：手持购物车视角；场景：超市；节奏：边逛边算，结尾揭晓。" },
+  { title: "居家咖啡拉花教程", tags: [{ text: "小红书", cls: "xhs" }, { text: "中爆", cls: "hot" }, { text: "咖啡", cls: "" }], idea: "咖啡拉花教程受众精准，视觉美感强易出图。", adaptedTitle: "在家也能拉出漂亮的拉花，3步就学会", xhsTitle: "居家咖啡拉花｜新手入门教程", plan: "机位：桌面近拍；场景：厨房；节奏：打奶泡→倒入→拉花特写。" }
 ];
 
 // 雅思词汇池
@@ -368,7 +358,19 @@ const knowledgePool = [
 
 const topicPool = [
   "30天自律挑战：每天早起1小时", "用100元改造书桌一角", "普通人如何养成高级感气质",
-  "我的一周备餐流程分享", "下班后的3小时可以做多少事", "一年读50本书，我的阅读方法"
+  "我的一周备餐流程分享", "下班后的3小时可以做多少事", "一年读50本书，我的阅读方法",
+  "极简衣柜整理：胶囊衣橱打造计划", "居家健身30天打卡：从零开始", "手账入门：让记录变成习惯",
+  "一个人住的100个幸福瞬间", "早起21天实验：我真的变了吗", "100元挑战做一周三餐",
+  "数字断舍离：一周不看短视频", "学会拒绝：我的边界感练习", "城市漫步：发现身边的隐藏风景",
+  "从零开始学理财：记账100天", "独居女孩的安全指南", "用碎片时间学一门新技能",
+  "整理手机相册：回忆杀与断舍离", "一杯咖啡的钱能做什么投资", "周末市集淘货分享",
+  "沉浸式学习vlog：图书馆一天", "普通人如何拍出好看的自拍", "从社恐到社牛的心路历程",
+  "秋冬护肤攻略：干皮逆袭记", "用AI工具提升工作效率的5种方式", "第一次养多肉植物翻车记",
+  "上班族带饭日记：一周不重样", "深夜厨房：一个人的治愈美食", "穿搭色系搭配指南",
+  "断舍离第7天：扔掉了什么意想不到的东西", "手写信计划：给未来的自己", "公园20分钟效应实测",
+  "自制节日装饰：氛围感拉满", "学一项乐器30天：尤克里里入门", "旧物改造：让闲置起死回生",
+  "城市探索：我发现了10个宝藏小店", "一周不看外卖自己做饭", "养成晨跑习惯的真实感受",
+  "沉浸式护肤：晚间治愈routine", "第一次摆摊卖手工：真实收入大公开", "用Notion搭建个人管理系统"
 ];
 
 const moodMap = {
@@ -463,22 +465,127 @@ function updateAudioBar(audio) {
   if (btn) btn.textContent = audio.paused ? '▶️' : '⏸️';
 }
 
-// 核心播放函数（多端点+Web Speech降级）
+// 核心播放函数 - 智能分流：单词走TTS（音质好），句子走Web Speech（零延迟流畅）
 function playAudio(text, btnEl, rate, onEndedCb) {
   if (!text) return;
   stopAudio();
-  
+
   const speed = rate === undefined ? engSpeed : rate;
-  
-  // 方案1: 用TTS API（多端点自动切换）
-  tryPlayTTS(text, speed, btnEl, () => {
-    // TTS全部失败，降级到 Web Speech API
-    tryPlayWebSpeech(text, btnEl, speed, onEndedCb);
-  }, onEndedCb);
+  const wordCount = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+  const isWord = wordCount <= 1;
+
+  // 给用户即时反馈
+  document.querySelectorAll('.speak-btn.playing').forEach(b => b.classList.remove('playing'));
+  if (btnEl) btnEl.classList.add('playing');
+  showAudioBar();
+  updateAudioBar({ duration: null, currentTime: 0, paused: false });
+
+  if (isWord) {
+    // 单词：TTS优先（有道音质好），失败→Web Speech兜底
+    tryPlayTTS(text, speed, btnEl, () => {
+      tryPlayWebSpeech(text, btnEl, speed, onEndedCb, undefined, () => {
+        hideAudioBar();
+        if (btnEl) btnEl.classList.remove('playing');
+        showToast('播放失败，请检查网络或更新浏览器');
+      });
+    }, onEndedCb);
+  } else {
+    // 句子：Web Speech优先（本地合成，零延迟，最流畅）
+    tryPlayWebSpeech(text, btnEl, speed, onEndedCb, undefined, () => {
+      // Web Speech失败 → TTS兜底（完整文本）
+      tryPlayTTS(text, speed, btnEl, () => {
+        // 完整TTS也失败 → 拆块播放
+        if (wordCount > 1) {
+          playAudioChunked(text, speed, btnEl, onEndedCb, () => {
+            hideAudioBar();
+            if (btnEl) btnEl.classList.remove('playing');
+            showToast('播放失败，请检查网络或更新浏览器');
+          });
+        } else {
+          hideAudioBar();
+          if (btnEl) btnEl.classList.remove('playing');
+          showToast('播放失败，请检查网络或更新浏览器');
+        }
+      }, onEndedCb);
+    });
+  }
 }
 
-function tryPlayTTS(text, speed, btnEl, onAllFail, onEndedCb, attempt = 0) {
-  if (attempt >= TTS_ENDPOINTS.length) {
+// 拆分长文本为2-3词短块，逐块用有道TTS播放（绕过ORB对长文本的拦截）
+function playAudioChunked(text, speed, btnEl, onAllDone, onAllFail) {
+  const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+  if (words.length === 0) { onAllFail && onAllFail(); return; }
+
+  // 每块最多3个词，避免有道对长文本返回非音频内容被ORB拦截
+  const chunkSize = 3;
+  const chunks = [];
+  for (let i = 0; i < words.length; i += chunkSize) {
+    chunks.push(words.slice(i, i + chunkSize).join(' '));
+  }
+
+  let chunkIdx = 0;
+  let successCount = 0;
+
+  // 模拟进度条
+  const totalChunks = chunks.length;
+  const estWordRate = 3 * speed; // 每秒约3词
+  const totalDuration = words.length / estWordRate;
+  const startTime = Date.now();
+  updateAudioBar({ duration: totalDuration, currentTime: 0, paused: false });
+  if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
+  progressTimer = setInterval(() => {
+    const elapsed = (Date.now() - startTime) / 1000;
+    updateAudioBar({ duration: totalDuration, currentTime: Math.min(elapsed, totalDuration), paused: false });
+    if (elapsed >= totalDuration) { clearInterval(progressTimer); progressTimer = null; }
+  }, 200);
+
+  function playNextChunk() {
+    // 如果播放被停止了（用户点了其他按钮或stopAudio），不再继续
+    if (btnEl && !btnEl.classList.contains('playing')) {
+      if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
+      return;
+    }
+    if (chunkIdx >= totalChunks) {
+      // 所有块播放完毕
+      if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
+      if (btnEl) btnEl.classList.remove('playing');
+      if (successCount > 0) {
+        if (onAllDone) { onAllDone(); }
+        else { hideAudioBar(); }
+      } else {
+        onAllFail && onAllFail();
+      }
+      return;
+    }
+
+    const chunk = chunks[chunkIdx];
+    // maxAttempts=1: 块播放只试有道端点（2s超时快速失败，不浪费时间试Google被墙端点）
+    tryPlayTTS(chunk, speed, btnEl, () => {
+      // 当前块TTS失败，跳到下一块继续
+      chunkIdx++;
+      setTimeout(playNextChunk, 100);
+    }, () => {
+      // 当前块播放成功
+      successCount++;
+      chunkIdx++;
+      if (chunkIdx < totalChunks) {
+        setTimeout(playNextChunk, 120);
+      } else {
+        // 全部播放完
+        if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
+        if (btnEl) btnEl.classList.remove('playing');
+        if (onAllDone) { onAllDone(); }
+        else { hideAudioBar(); }
+      }
+    }, 0, 1);
+  }
+
+  playNextChunk();
+}
+
+function tryPlayTTS(text, speed, btnEl, onAllFail, onEndedCb, attempt = 0, maxAttempts) {
+  const limit = maxAttempts || TTS_ENDPOINTS.length;
+  if (attempt >= limit) {
     onAllFail && onAllFail();
     return;
   }
@@ -490,24 +597,20 @@ function tryPlayTTS(text, speed, btnEl, onAllFail, onEndedCb, attempt = 0) {
   audio.volume = 1;
   audio.preload = 'auto';
   audio.timeoutId = null;
-  audio.attemptIndex = attempt;
   audio.hasStarted = false;
 
-  document.querySelectorAll('.speak-btn.playing').forEach(b => b.classList.remove('playing'));
-  if (btnEl) btnEl.classList.add('playing');
-
   currentAudio = audio;
-  showAudioBar();
   updateAudioBar({ duration: null, currentTime: 0, paused: false });
 
-  // 超时3秒未播放则换下一个端点
+  // 首端点超时短（2秒），快速降级；后续端点放宽到4秒
+  const timeoutMs = attempt === 0 ? 2000 : 4000;
   audio.timeoutId = setTimeout(() => {
     if (audio === currentAudio && !audio.hasStarted) {
       audio.pause();
       audio.src = '';
-      tryPlayTTS(text, speed, btnEl, onAllFail, onEndedCb, attempt + 1);
+      tryPlayTTS(text, speed, btnEl, onAllFail, onEndedCb, attempt + 1, maxAttempts);
     }
-  }, 3000);
+  }, timeoutMs);
 
   const onPlay = () => {
     audio.hasStarted = true;
@@ -526,7 +629,7 @@ function tryPlayTTS(text, speed, btnEl, onAllFail, onEndedCb, attempt = 0) {
     if (audio === currentAudio) {
       audio.pause();
       audio.src = '';
-      tryPlayTTS(text, speed, btnEl, onAllFail, onEndedCb, attempt + 1);
+      tryPlayTTS(text, speed, btnEl, onAllFail, onEndedCb, attempt + 1, maxAttempts);
     }
   };
 
@@ -541,51 +644,75 @@ function tryPlayTTS(text, speed, btnEl, onAllFail, onEndedCb, attempt = 0) {
   });
 }
 
-// 降级方案：使用浏览器 Web Speech API
-function tryPlayWebSpeech(text, btnEl, speed, onEndedCb, retryCount) {
+// 降级方案：使用浏览器 Web Speech API（增加 onFailCb 兜底，失败时可回退）
+function tryPlayWebSpeech(text, btnEl, speed, onEndedCb, retryCount, onFailCb) {
   if (!('speechSynthesis' in window)) {
-    hideAudioBar();
-    if (btnEl) btnEl.classList.remove('playing');
-    showToast('当前网络无法播放音频，请检查网络或使用最新版浏览器');
+    onFailCb && onFailCb();
     return;
   }
-  
-  // 如果语音列表还没加载好，延迟重试最多3次
+
+  // 语音列表未加载 → 最多等3次（600ms），超过就判失败走兜底
   const voices = window.speechSynthesis.getVoices();
   if (voices.length === 0 && (retryCount === undefined || retryCount < 3)) {
     const retry = (retryCount || 0) + 1;
-    setTimeout(() => tryPlayWebSpeech(text, btnEl, speed, onEndedCb, retry), 200);
+    setTimeout(() => tryPlayWebSpeech(text, btnEl, speed, onEndedCb, retry, onFailCb), 200);
     return;
   }
-  
-  window.speechSynthesis.cancel();
+
+  // 3次重试后仍空 → 判定Web Speech不可用，走fallback
+  if (voices.length === 0) {
+    onFailCb && onFailCb();
+    return;
+  }
+
+  // 保护：如果speaking但没在说，先彻底cancel
+  try { window.speechSynthesis.cancel(); } catch (e) {}
   const u = new SpeechSynthesisUtterance(text);
   u.lang = 'en-US';
   u.rate = speed;
-  u.pitch = 1;
   u.volume = 1;
-  
-  // 尝试选择英文语音（优先高质量）
+
+  // 根据句子类型动态调整 pitch，让语音更有感情
+  const trimText = text.trim();
+  if (/[!?]$/.test(trimText) || /^(what|why|how|who|where|when|do you|can you|could you|would you|is it|are you)/i.test(trimText)) {
+    u.pitch = 1.15;  // 疑问句/感叹句：略升调，表现情绪
+  } else if (/^(i think|i believe|i feel|i hope|i wish)/i.test(trimText)) {
+    u.pitch = 0.9;   // 表达个人感受：略低沉，更真诚
+  } else {
+    u.pitch = 1.0 + (Math.random() - 0.5) * 0.1;  // 陈述句：轻微随机变化，避免机械感
+  }
+
+  // 语音选择：严格按优先顺序匹配，优先选有感情的高质量女声
   const enVoices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'));
   if (enVoices.length > 0) {
-    const preferredNames = ['Samantha', 'Google UK English', 'Microsoft', 'Female', 'Natural'];
-    let bestVoice = enVoices.find(v => preferredNames.some(n => v.name.includes(n)));
-    if (!bestVoice) bestVoice = enVoices[0];
+    const preferredNames = [
+      'Samantha',        // macOS 最好的女声，有感情
+      'Google UK English Female',  // Chrome 高质量女声
+      'Google US English',
+      'Microsoft Aria',  // Edge 自然语音
+      'Microsoft Jenny',
+      'Microsoft Zira',
+      'Google UK English Male',
+      'Female', 'Natural', 'Aria'
+    ];
+    let bestVoice = null;
+    for (const name of preferredNames) {
+      bestVoice = enVoices.find(v => v.name.includes(name));
+      if (bestVoice) break;
+    }
+    if (!bestVoice) {
+      // 优先选女声（通常更自然）
+      bestVoice = enVoices.find(v => /female|aria|jenny|zira|samantha/i.test(v.name)) || enVoices[0];
+    }
     u.voice = bestVoice;
   }
-  
-  document.querySelectorAll('.speak-btn.playing').forEach(b => b.classList.remove('playing'));
-  if (btnEl) btnEl.classList.add('playing');
-  showAudioBar();
-  
+
   // 估算播放时长（英文约每秒3-4个词）
   const wordCount = text.split(/\s+/).length;
   const estimatedDuration = Math.max(3, wordCount / (3 * speed));
-  
   const fakeAudio = { duration: estimatedDuration, currentTime: 0, paused: false, estimatedDuration };
   updateAudioBar(fakeAudio);
-  
-  // 进度条模拟
+
   const startTime = Date.now();
   progressTimer = setInterval(() => {
     const elapsed = (Date.now() - startTime) / 1000;
@@ -596,24 +723,50 @@ function tryPlayWebSpeech(text, btnEl, speed, onEndedCb, retryCount) {
       progressTimer = null;
     }
   }, 100);
-  
+
+  // 看门狗：超过预估时长+5秒仍未触发onend/onstart，判定卡死 → fallback
+  const watchdog = setTimeout(() => {
+    if (currentUtterance === u) {
+      try { window.speechSynthesis.cancel(); } catch (e) {}
+    }
+  }, (estimatedDuration + 5) * 1000);
+
+  let failed = false;
+  const triggerFail = () => {
+    if (failed) return;
+    failed = true;
+    clearTimeout(watchdog);
+    if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
+    onFailCb && onFailCb();
+  };
+
+  u.onstart = () => {
+    clearTimeout(watchdog);
+  };
   u.onend = () => {
+    clearTimeout(watchdog);
     if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
     if (btnEl) btnEl.classList.remove('playing');
     if (onEndedCb) { onEndedCb(); }
     else { hideAudioBar(); }
   };
   u.onerror = (e) => {
-    if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
-    if (btnEl) btnEl.classList.remove('playing');
-    hideAudioBar();
-    if (e.error !== 'canceled' && e.error !== 'interrupted') {
-      showToast('语音合成失败');
-    }
+    if (e.error === 'canceled' || e.error === 'interrupted') return;
+    triggerFail();
   };
-  
+
   currentUtterance = u;
-  window.speechSynthesis.speak(u);
+  try {
+    window.speechSynthesis.speak(u);
+    // 某些Chrome上speak后会静默失败，如果500ms内还没开始播放且未pending，则判失败
+    setTimeout(() => {
+      if (currentUtterance === u && !window.speechSynthesis.speaking && !window.speechSynthesis.pending) {
+        triggerFail();
+      }
+    }, 500);
+  } catch (e) {
+    triggerFail();
+  }
 }
 
 function stopAudio() {
@@ -908,6 +1061,18 @@ function updateWelcomeName() {
 // ===================== 爆款二创 + 灵感存储 =====================
 function initRecreation() {
   const list = document.getElementById('recreationList');
+  // 每次随机抽取5条展示
+  function pickRandomItems(count) {
+    const pool = [...recreationData];
+    const result = [];
+    for (let i = 0; i < Math.min(count, pool.length); i++) {
+      const idx = Math.floor(Math.random() * pool.length);
+      result.push({ ...pool[idx], originalIdx: recreationData.indexOf(pool[idx]) });
+      pool.splice(idx, 1);
+    }
+    return result;
+  }
+  let currentItems = pickRandomItems(5);
   function render() {
     const insps = JSON.parse(localStorage.getItem('cc_inspirations') || '[]');
     const inspCard = insps.length
@@ -917,7 +1082,12 @@ function initRecreation() {
              ${insps.map((t, i) => `<div style="font-size:13px;color:var(--text);padding:6px 10px;background:#fff;border-radius:8px">${i + 1}. ${t}</div>`).join('')}
            </div>
          </div>` : '';
-    list.innerHTML = inspCard + recreationData.map((item, idx) => `
+    list.innerHTML = inspCard + `
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <span style="font-size:13px;color:var(--text-secondary)">共${recreationData.length}条灵感，每次展示5条</span>
+        <button class="btn btn-primary" id="refreshAllRecreation" style="font-size:13px;padding:6px 14px">🔄 换一批</button>
+      </div>
+    ` + currentItems.map((item, idx) => `
       <article class="recreation-card" data-index="${idx}">
         <h3>${item.title}</h3>
         <div class="platform-tags">${item.tags.map(t => `<span class="tag ${t.cls}">${t.text}</span>`).join('')}</div>
@@ -928,7 +1098,6 @@ function initRecreation() {
         <div class="card-actions">
           <button class="btn btn-primary btn-add-task">加入任务</button>
           <button class="btn btn-secondary btn-save-idea" data-title="${item.title}">存为灵感</button>
-          <button class="btn btn-ghost btn-view-script">查看脚本</button>
         </div>
         <button class="btn-refresh btn-change-one" data-index="${idx}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 5.5A10 10 0 1 1 11.26 2.67"/></svg>换一条
@@ -937,6 +1106,11 @@ function initRecreation() {
     bindActions();
   }
   function bindActions() {
+    const refreshAll = document.getElementById('refreshAllRecreation');
+    if (refreshAll) refreshAll.addEventListener('click', () => {
+      list.style.opacity = '0.5';
+      setTimeout(() => { currentItems = pickRandomItems(5); render(); list.style.opacity = '1'; }, 200);
+    });
     document.querySelectorAll('.btn-add-task').forEach(btn => btn.addEventListener('click', () => {
       const title = btn.closest('.recreation-card').querySelector('h3').textContent;
       addTodoToToday(title);
@@ -950,12 +1124,16 @@ function initRecreation() {
       render();
       showToast('已保存到灵感库');
     }));
-    document.querySelectorAll('.btn-view-script').forEach(btn => btn.addEventListener('click', () => showToast('脚本详情开发中')));
     document.querySelectorAll('.btn-change-one').forEach(btn => btn.addEventListener('click', () => {
       const card = btn.closest('.recreation-card');
+      const idx = parseInt(card.dataset.index);
       card.style.opacity = '0.5';
       setTimeout(() => {
-        recreationData[card.dataset.index] = { ...recreationData[Math.floor(Math.random() * recreationData.length)] };
+        // 从未展示的池子里随机取一条替换
+        const usedTitles = currentItems.map(i => i.title);
+        const remaining = recreationData.filter(d => !usedTitles.includes(d.title));
+        const pool = remaining.length > 0 ? remaining : recreationData;
+        currentItems[idx] = { ...pool[Math.floor(Math.random() * pool.length)] };
         render();
       }, 200);
     }));
@@ -1737,7 +1915,7 @@ function initAccounting() {
   renderAll();
 }
 
-// ===================== 今日待办（按日独立 + 感悟框 + 日历） =====================
+// ===================== 今日待办（按日独立 + 感悟框 + 日历）+ 每日待办 =====================
 function getInheritedTodos(date) {
   for (let i = 1; i <= 400; i++) {
     const prev = addDays(date, -i);
@@ -1758,6 +1936,27 @@ function getTodosForDate(date) {
   return arr;
 }
 
+// 每日待办：固定事项模板 + 每日独立完成状态
+function getDailyTodos() {
+  return JSON.parse(localStorage.getItem('cc_daily_todos') || '[]');
+}
+function saveDailyTodos(arr) {
+  localStorage.setItem('cc_daily_todos', JSON.stringify(arr));
+}
+function getDailyDoneState(date) {
+  const k = 'cc_daily_done_' + fmtDate(date);
+  const arr = JSON.parse(localStorage.getItem(k) || 'null');
+  const templates = getDailyTodos();
+  // 对齐长度
+  if (!arr || arr.length !== templates.length) {
+    return new Array(templates.length).fill(false);
+  }
+  return arr;
+}
+function saveDailyDoneState(date, stateArr) {
+  localStorage.setItem('cc_daily_done_' + fmtDate(date), JSON.stringify(stateArr));
+}
+
 function initTodo() {
   const state = { currentDate: new Date(), calendarMonth: new Date() };
   const titleEl = document.getElementById('todoDateTitle');
@@ -1768,12 +1967,67 @@ function initTodo() {
   const input = document.getElementById('todoInput');
   const addBtn = document.getElementById('addTodo');
   const list = document.getElementById('todoList');
+  const dailyInput = document.getElementById('dailyTodoInput');
+  const dailyAddBtn = document.getElementById('addDailyTodo');
+  const dailyList = document.getElementById('dailyTodoList');
   const calEl = document.getElementById('todoCalendar');
   const historyList = document.getElementById('todoHistoryList');
 
   function key(d) { return 'cc_todo_' + fmtDate(d); }
 
   function save(arr) { localStorage.setItem(key(state.currentDate), JSON.stringify(arr)); updateHomeStats(); renderCalendar(); renderHistory(); }
+
+  // ---- 每日待办渲染 ----
+  function renderDailyList() {
+    const templates = getDailyTodos();
+    const doneState = getDailyDoneState(state.currentDate);
+    const isToday = fmtDate(state.currentDate) === fmtDate(new Date());
+    if (!templates.length) {
+      dailyList.innerHTML = `<li style="text-align:center;color:var(--text-secondary);padding:20px 0;background:transparent">还没有每日待办，添加一些固定事项吧～</li>`;
+      return;
+    }
+    dailyList.innerHTML = templates.map((t, idx) => `
+      <li class="todo-item-block ${doneState[idx] ? 'done' : ''}" data-index="${idx}">
+        <div class="todo-item-row">
+          <input type="checkbox" class="daily-check" ${doneState[idx] ? 'checked' : ''} data-index="${idx}" ${!isToday ? 'disabled' : ''} />
+          <span class="todo-item-text">${t.text}</span>
+          ${isToday ? `<button class="todo-delete daily-delete" data-index="${idx}">×</button>` : ''}
+        </div>
+      </li>`).join('');
+
+    dailyList.querySelectorAll('.daily-check').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const ds = getDailyDoneState(state.currentDate);
+        ds[cb.dataset.index] = cb.checked;
+        saveDailyDoneState(state.currentDate, ds);
+        renderDailyList();
+      });
+    });
+    dailyList.querySelectorAll('.daily-delete').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const templates = getDailyTodos();
+        templates.splice(btn.dataset.index, 1);
+        saveDailyTodos(templates);
+        // 同步删除当天的完成状态
+        const ds = getDailyDoneState(state.currentDate);
+        ds.splice(btn.dataset.index, 1);
+        saveDailyDoneState(state.currentDate, ds);
+        renderDailyList();
+      });
+    });
+  }
+
+  function addDaily() {
+    const text = dailyInput.value.trim();
+    if (!text) return;
+    const templates = getDailyTodos();
+    templates.push({ text });
+    saveDailyTodos(templates);
+    dailyInput.value = '';
+    renderDailyList();
+  }
+  dailyAddBtn.addEventListener('click', addDaily);
+  dailyInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') addDaily(); });
 
   function renderList() {
     const todos = getTodosForDate(state.currentDate);
@@ -1857,11 +2111,12 @@ function initTodo() {
   function renderAll() {
     titleEl.textContent = fmtDateCN(state.currentDate);
     const isToday = fmtDate(state.currentDate) === fmtDate(new Date());
-    modeHint.textContent = isToday ? '今日待办会自动延续到明天，每天独立互不影响' : '历史查看模式 · 当天待办只读';
-    // 输入框仅今天可用
+    modeHint.textContent = isToday ? '每日待办+今日待办，每天独立互不影响' : '历史查看模式 · 当天待办只读';
     input.disabled = !isToday;
     addBtn.disabled = !isToday;
-    renderList(); renderCalendar(); renderHistory();
+    if (dailyInput) dailyInput.disabled = !isToday;
+    if (dailyAddBtn) dailyAddBtn.disabled = !isToday;
+    renderDailyList(); renderList(); renderCalendar(); renderHistory();
   }
   renderAll();
 }
@@ -1870,7 +2125,66 @@ function initTodo() {
 function initTopicGenerator() {
   const box = document.getElementById('topicBox');
   const btn = document.getElementById('generateTopic');
-  btn.addEventListener('click', () => { box.textContent = topicPool[Math.floor(Math.random() * topicPool.length)]; });
+  const copyCard = document.getElementById('topicCopyCard');
+  const copyResult = document.getElementById('topicCopyResult');
+  const wordCountInput = document.getElementById('topicCopyWordCount');
+  const regenerateBtn = document.getElementById('regenerateCopyBtn');
+  const copyBtn = document.getElementById('copyTopicText');
+  const toTaskBtn = document.getElementById('copyTopicToTask');
+  let lastTopic = '';
+  let lastCopy = '';
+
+  // 文案模板库：根据选题关键词匹配模板生成文案
+  const copyTemplates = [
+    (t) => `你是否也想过「${t}」？其实没有想象中那么难。第一步永远是最难的，但只要开始，就已经超越了昨天的自己。一起来看看我是怎么做的吧，相信你也能找到属于自己的节奏。`,
+    (t) => `今天想跟大家分享「${t}」。说实话，一开始我也觉得不太可能，但真正做下来才发现，关键不在于天赋，而在于坚持。每一步的小进步，都在悄悄改变着你。`,
+    (t) => `关于「${t}」这件事，我有话说。很多人觉得这很难，但其实只要你愿意迈出第一步，后面的事情自然水到渠成。来听听我的真实经历吧，或许会给你一些启发。`,
+    (t) => `最近在尝试「${t}」，结果出乎意料。以为会很难，没想到过程中发现了好多惊喜。如果你也想试试，不妨先看看我的踩坑记录，说不定能帮你少走弯路。`,
+    (t) => `「${t}」——这个话题我憋了好久想分享。从下定决心到真正行动，中间纠结了很久。但回过头看，那些纠结的时间其实完全可以省掉。做就对了，别想太多。`,
+    (t) => `一直想聊「${t}」这个话题。很多人问我怎么做到的，其实秘诀只有一个：别等完美时机。现在的每一天都是最好的开始，跟我一起行动起来吧！`,
+    (t) => `做了「${t}」之后，我的生活真的不一样了。不是翻天覆地的变化，而是那种每天进步一点点的踏实感。分享给你，希望你也能找到这份力量。`,
+    (t) => `如果你正在犹豫要不要开始「${t}」，这条内容就是给你的。我把最真实的体验、踩过的坑、收获的惊喜都记录下来了，看完你就知道该怎么做了。`,
+  ];
+
+  function generateCopy(topic, wordCount) {
+    const template = copyTemplates[Math.floor(Math.random() * copyTemplates.length)];
+    let text = template(topic);
+    // 裁剪到目标字数
+    if (text.length > wordCount + 10) {
+      text = text.substring(0, wordCount);
+      // 在最后一句完整的位置截断
+      const lastPeriod = Math.max(text.lastIndexOf('。'), text.lastIndexOf('，'), text.lastIndexOf('！'));
+      if (lastPeriod > wordCount * 0.7) text = text.substring(0, lastPeriod + 1);
+    }
+    return text;
+  }
+
+  btn.addEventListener('click', () => {
+    lastTopic = topicPool[Math.floor(Math.random() * topicPool.length)];
+    box.textContent = lastTopic;
+    copyCard.style.display = '';
+    const wc = parseInt(wordCountInput.value) || 80;
+    lastCopy = generateCopy(lastTopic, wc);
+    copyResult.textContent = lastCopy;
+  });
+
+  regenerateBtn.addEventListener('click', () => {
+    if (!lastTopic) return;
+    const wc = parseInt(wordCountInput.value) || 80;
+    lastCopy = generateCopy(lastTopic, wc);
+    copyResult.textContent = lastCopy;
+  });
+
+  copyBtn.addEventListener('click', () => {
+    if (!lastCopy) return;
+    navigator.clipboard.writeText(lastCopy).then(() => showToast('已复制到剪贴板')).catch(() => showToast('复制失败'));
+  });
+
+  toTaskBtn.addEventListener('click', () => {
+    if (!lastTopic) return;
+    addTodoToToday(lastTopic);
+    showToast('已加入今日待办');
+  });
 }
 
 // ===================== Toast =====================
