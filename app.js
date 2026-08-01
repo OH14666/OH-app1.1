@@ -38,6 +38,252 @@ function shuffle(arr) {
   return a;
 }
 
+// ===================== Supabase 认证 + 数据同步 =====================
+// ⚠️ 部署前必改：把下面两个值换成你 Supabase 项目的密钥
+const SUPABASE_URL = 'https://plugxtzgyrxbpvlvvyzw.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBsdWd4dHpneXJ4YnB2bHZ2eXp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1Mjc3NDksImV4cCI6MjEwMTEwMzc0OX0.6MeLsrnBqmNy3BZg8UfWseel02-B3UUnelnQjV4N2RQ';
+
+let sbClient = null;
+let currentUser = null; // { id, email, name }
+
+// 初始化 Supabase 客户端
+function initSupabase() {
+  if (!window.supabase || SUPABASE_URL.includes('YOUR_PROJECT')) return;
+  sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  // 监听登录状态变化
+  sbClient.auth.onAuthStateChange((event, session) => {
+    if (session?.user) {
+      currentUser = { id: session.user.id, email: session.user.email, name: session.user.user_metadata?.name || session.user.email.split('@')[0] };
+      onUserLoggedIn(currentUser);
+    } else {
+      if (currentUser) onUserLoggedOut();
+      currentUser = null;
+    }
+  });
+  // 检查已有会话（页面刷新后恢复登录状态）
+  sbClient.auth.getSession().then(({ data }) => {
+    if (data.session?.user) {
+      currentUser = { id: data.session.user.id, email: data.session.user.email, name: data.session.user.user_metadata?.name || data.session.user.email.split('@')[0] };
+      onUserLoggedIn(currentUser);
+    }
+  });
+}
+
+// 数据隔离：登录后 key 加前缀，未登录用原始 key
+function storageKey(key) {
+  if (currentUser) return `u_${currentUser.id}_${key}`;
+  return key;
+}
+
+// 所有需要同步的 localStorage key 前缀列表
+const SYNCABLE_KEYS = ['cc_name','cc_subtitle','cc_avatar','cc_word_favorites','cc_fav_review_time','cc_inspirations','cc_eng_speed','cc_daily_todos','cc_knowledge_seen','cc_knowledge_history'];
+
+// 需要按日期同步的 key 前缀（每天一个 key）
+const SYNCABLE_DATE_PREFIXES = ['cc_todo_','cc_eng_','cc_daily_done_','cc_record_','cc_account_'];
+
+// 获取所有需要同步的 key（包括日期相关的）
+function getAllSyncableKeys() {
+  const keys = new Set();
+  // 固定 key
+  SYNCABLE_KEYS.forEach(k => {
+    if (currentUser) keys.add(`u_${currentUser.id}_${k}`);
+    else keys.add(k);
+  });
+  // 扫描 localStorage 找日期相关 key
+  const allKeys = Object.keys(localStorage);
+  const prefix = currentUser ? `u_${currentUser.id}_` : '';
+  SYNCABLE_DATE_PREFIXES.forEach(p => {
+    const fullPrefix = prefix + p;
+    allKeys.forEach(k => {
+      if (k.startsWith(fullPrefix)) keys.add(k);
+    });
+  });
+  return Array.from(keys);
+}
+
+// 从 storage key 提取原始 key（去掉用户前缀）
+function stripUserPrefix(key) {
+  if (currentUser && key.startsWith(`u_${currentUser.id}_`)) {
+    return key.substring(`u_${currentUser.id}_`.length);
+  }
+  return key;
+}
+
+// 上传所有本地数据到 Supabase
+async function syncLocalToCloud() {
+  if (!sbClient || !currentUser) return;
+  const keys = getAllSyncableKeys();
+  const records = [];
+  keys.forEach(k => {
+    const val = localStorage.getItem(k);
+    if (val !== null) {
+      records.push({ user_id: currentUser.id, key: stripUserPrefix(k), value: val, updated_at: new Date().toISOString() });
+    }
+  });
+  if (records.length === 0) return;
+  // upsert：存在则更新，不存在则插入
+  for (const r of records) {
+    await sbClient.from('user_data').upsert(r, { onConflict: 'user_id,key' });
+  }
+}
+
+// 从 Supabase 拉取云端数据到本地
+async function syncCloudToLocal() {
+  if (!sbClient || !currentUser) return;
+  const { data, error } = await sbClient.from('user_data').select('key,value').eq('user_id', currentUser.id);
+  if (error || !data) return;
+  data.forEach(row => {
+    const localKey = `u_${currentUser.id}_${row.key}`;
+    localStorage.setItem(localKey, row.value);
+  });
+}
+
+// 用户登录后处理
+function onUserLoggedIn(user) {
+  // 更新悬浮按钮显示
+  const btn = document.getElementById('authFloatBtn');
+  if (btn) {
+    btn.innerHTML = `<span class="auth-avatar">${user.name.charAt(0).toUpperCase()}</span><span class="auth-float-label">${user.name}</span>`;
+    btn.title = '点击退出登录';
+  }
+  // 从云端拉取数据到本地
+  syncCloudToLocal().then(() => {
+    // 刷新页面数据
+    if (typeof initTodo === 'function') { renderTodoIfActive(); }
+    if (typeof updateHomeStats === 'function') updateHomeStats();
+    if (typeof renderWordFavorites === 'function') renderWordFavorites();
+  });
+  // 检查是否有本地匿名数据需要迁移
+  checkLocalDataMigration();
+}
+
+// 检查本地匿名数据是否需要迁移
+function checkLocalDataMigration() {
+  // 找原始 key（无前缀）的数据
+  const hasLocalData = SYNCABLE_KEYS.some(k => localStorage.getItem(k) !== null) ||
+    Object.keys(localStorage).some(k => SYNCABLE_DATE_PREFIXES.some(p => k.startsWith(p) && !k.startsWith('u_')));
+  if (hasLocalData) {
+    document.getElementById('migrateModal').style.display = '';
+  }
+}
+
+// 用户退出登录
+function onUserLoggedOut() {
+  // 清空当前账号的本地缓存数据
+  const prefix = `u_${currentUser?.id || ''}_`;
+  if (currentUser) {
+    Object.keys(localStorage).filter(k => k.startsWith(prefix)).forEach(k => localStorage.removeItem(k));
+  }
+  currentUser = null;
+  // 恢复悬浮按钮
+  const btn = document.getElementById('authFloatBtn');
+  if (btn) {
+    btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="auth-float-label">登录</span>`;
+    btn.title = '登录同步数据';
+  }
+  showToast('已退出登录，本地缓存已清除');
+  // 刷新页面恢复匿名数据
+  setTimeout(() => location.reload(), 500);
+}
+
+// 初始化认证UI
+function initAuthUI() {
+  const floatBtn = document.getElementById('authFloatBtn');
+  const modal = document.getElementById('authModal');
+  const closeBtn = document.getElementById('authCloseBtn');
+  const errorEl = document.getElementById('authError');
+
+  // 悬浮按钮点击：已登录→退出确认，未登录→打开弹窗
+  floatBtn.addEventListener('click', () => {
+    if (currentUser) {
+      if (confirm('确定退出登录？退出后将清除本机该账号的缓存数据。')) {
+        sbClient.auth.signOut();
+      }
+    } else {
+      modal.style.display = '';
+    }
+  });
+  closeBtn.addEventListener('click', () => { modal.style.display = 'none'; clearError(); });
+  modal.addEventListener('click', (e) => { if (e.target === modal) { modal.style.display = 'none'; clearError(); } });
+
+  // Tab 切换
+  document.querySelectorAll('.auth-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('authLoginForm').style.display = tab.dataset.tab === 'login' ? '' : 'none';
+      document.getElementById('authRegisterForm').style.display = tab.dataset.tab === 'register' ? '' : 'none';
+      clearError();
+    });
+  });
+
+  function showError(msg) { errorEl.textContent = msg; errorEl.style.display = ''; }
+  function clearError() { errorEl.style.display = 'none'; }
+
+  // 邮箱密码登录
+  document.getElementById('loginSubmit').addEventListener('click', async () => {
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    if (!email || !password) { showError('请输入邮箱和密码'); return; }
+    const { error } = await sbClient.auth.signInWithPassword({ email, password });
+    if (error) { showError(error.message); return; }
+    modal.style.display = 'none'; clearError();
+  });
+
+  // 邮箱注册
+  document.getElementById('registerSubmit').addEventListener('click', async () => {
+    const email = document.getElementById('registerEmail').value.trim();
+    const password = document.getElementById('registerPassword').value;
+    if (!email || !password) { showError('请输入邮箱和密码'); return; }
+    if (password.length < 6) { showError('密码至少6位'); return; }
+    const { error } = await sbClient.auth.signUp({ email, password });
+    if (error) { showError(error.message); return; }
+    showToast('注册成功！请检查邮箱确认');
+    modal.style.display = 'none'; clearError();
+  });
+
+  // GitHub OAuth 登录/注册
+  ['githubLoginBtn', 'githubRegisterBtn'].forEach(id => {
+    document.getElementById(id).addEventListener('click', async () => {
+      const { error } = await sbClient.auth.signInWithOAuth({ provider: 'github', options: { redirectTo: location.origin + location.pathname } });
+      if (error) showError(error.message);
+    });
+  });
+
+  // 数据迁移弹窗
+  document.getElementById('migrateYes').addEventListener('click', async () => {
+    // 把匿名数据复制到当前账号前缀下
+    SYNCABLE_KEYS.forEach(k => {
+      const val = localStorage.getItem(k);
+      if (val !== null) { localStorage.setItem(`u_${currentUser.id}_${k}`, val); localStorage.removeItem(k); }
+    });
+    // 日期相关 key
+    Object.keys(localStorage).filter(k => SYNCABLE_DATE_PREFIXES.some(p => k.startsWith(p) && !k.startsWith('u_'))).forEach(k => {
+      const val = localStorage.getItem(k);
+      if (val !== null) { localStorage.setItem(`u_${currentUser.id}_${k}`, val); localStorage.removeItem(k); }
+    });
+    document.getElementById('migrateModal').style.display = 'none';
+    await syncLocalToCloud();
+    showToast('数据已同步到云端');
+    setTimeout(() => location.reload(), 800);
+  });
+  document.getElementById('migrateNo').addEventListener('click', () => {
+    document.getElementById('migrateModal').style.display = 'none';
+  });
+}
+
+// 刷新待办列表（登录/同步后调用）
+function renderTodoIfActive() {
+  const todoList = document.getElementById('todoList');
+  if (todoList && typeof getTodosForDate === 'function') {
+    // 重新渲染当前页面
+    const activePage = document.querySelector('.page.active');
+    if (activePage && activePage.id === 'page-todo') {
+      location.reload();
+    }
+  }
+}
+
 // ===================== 数据 =====================
 const recreationData = [
   { title: "源头厂探店：一副耳环的诞生", tags: [{ text: "抖音", cls: "douyin" }, { text: "大爆", cls: "hot" }, { text: "饰品", cls: "" }], idea: "你家里就是饰品源头厂，生产全过程是别人没有的信任背书。", adaptedTitle: "一副耳环从我家作坊到你手上", xhsTitle: "1688源头厂探访｜耳环制作全过程", plan: "机位：手持跟拍工作台；场景：家里作坊；节奏：中速，突出手工细节特写。" },
@@ -875,7 +1121,7 @@ async function fetchWordExample(word) {
 
 // 单词收藏
 function getFavorites() {
-  return JSON.parse(localStorage.getItem('cc_word_favorites') || '[]');
+  return JSON.parse(localStorage.getItem(storageKey('cc_word_favorites')) || '[]');
 }
 function toggleFavorite(word, ph, cn) {
   const favs = getFavorites();
@@ -885,7 +1131,7 @@ function toggleFavorite(word, ph, cn) {
   } else {
     favs.push({ en: word, ph: ph, cn: cn, ts: Date.now() });
   }
-  localStorage.setItem('cc_word_favorites', JSON.stringify(favs));
+  localStorage.setItem(storageKey('cc_word_favorites'), JSON.stringify(favs));
 }
 
 // ===================== 初始化 =====================
@@ -906,6 +1152,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initDataBackup();
   initAudioControls();
   updateHomeStats();
+  initSupabase();
+  initAuthUI();
   
   // 预加载 Web Speech API 语音
   if ('speechSynthesis' in window) {
@@ -934,18 +1182,18 @@ function initDate() {
 // ===================== 首页统计 =====================
 function updateHomeStats() {
   // 待办：今日数量
-  const todayKey = 'cc_todo_' + fmtDate(new Date());
+  const todayKey = storageKey('cc_todo_' + fmtDate(new Date()));
   const todos = JSON.parse(localStorage.getItem(todayKey) || '[]');
   const stTodo = document.getElementById('statTodo');
   if (stTodo) stTodo.textContent = todos.length;
 
   // 灵感
-  const insps = JSON.parse(localStorage.getItem('cc_inspirations') || '[]');
+  const insps = JSON.parse(localStorage.getItem(storageKey('cc_inspirations')) || '[]');
   const stInsp = document.getElementById('statInsp');
   if (stInsp) stInsp.textContent = insps.length;
 
   // 单词：今日学习
-  const eng = JSON.parse(localStorage.getItem('cc_eng_' + fmtDate(new Date())) || 'null');
+  const eng = JSON.parse(localStorage.getItem(storageKey('cc_eng_' + fmtDate(new Date()))) || 'null');
   const stWord = document.getElementById('statWord');
   if (stWord) stWord.textContent = (eng && eng.words) ? eng.words.length : 0;
 }
@@ -987,17 +1235,17 @@ function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.re
 
 // ===================== 个人资料 =====================
 function initProfile() {
-  const savedName = localStorage.getItem('cc_name');
-  const savedSubtitle = localStorage.getItem('cc_subtitle');
-  const savedAvatar = localStorage.getItem('cc_avatar');
+  const savedName = localStorage.getItem(storageKey('cc_name'));
+  const savedSubtitle = localStorage.getItem(storageKey('cc_subtitle'));
+  const savedAvatar = localStorage.getItem(storageKey('cc_avatar'));
   if (savedName) userName.textContent = savedName;
   if (savedSubtitle) userSubtitle.textContent = savedSubtitle;
   if (savedAvatar) userAvatar.src = savedAvatar;
   userName.addEventListener('blur', () => {
-    localStorage.setItem('cc_name', userName.textContent.trim());
+    localStorage.setItem(storageKey('cc_name'), userName.textContent.trim());
     updateWelcomeName();
   });
-  userSubtitle.addEventListener('blur', () => localStorage.setItem('cc_subtitle', userSubtitle.textContent.trim()));
+  userSubtitle.addEventListener('blur', () => localStorage.setItem(storageKey('cc_subtitle'), userSubtitle.textContent.trim()));
 
   // 头像编辑：打开选择弹窗（不再直接触发文件选择）
   avatarEdit.addEventListener('click', openAvatarPicker);
@@ -1015,7 +1263,7 @@ function initProfile() {
       item.addEventListener('click', () => {
         const a = avatarPresets[parseInt(item.dataset.index)];
         userAvatar.src = a.src;
-        localStorage.setItem('cc_avatar', a.src);
+        localStorage.setItem(storageKey('cc_avatar'), a.src);
         closeAvatarPicker();
         showToast('头像已更换为：' + a.gender + '·' + a.label);
       });
@@ -1037,7 +1285,7 @@ function initProfile() {
     const reader = new FileReader();
     reader.onload = (event) => {
       userAvatar.src = event.target.result;
-      localStorage.setItem('cc_avatar', event.target.result);
+      localStorage.setItem(storageKey('cc_avatar'), event.target.result);
       closeAvatarPicker();
       showToast('头像已上传');
     };
@@ -1074,7 +1322,7 @@ function initRecreation() {
   }
   let currentItems = pickRandomItems(5);
   function render() {
-    const insps = JSON.parse(localStorage.getItem('cc_inspirations') || '[]');
+    const insps = JSON.parse(localStorage.getItem(storageKey('cc_inspirations')) || '[]');
     const inspCard = insps.length
       ? `<div class="section-card" style="background:linear-gradient(135deg,#FFF0F3,#fff);margin-bottom:16px">
            <h3 style="margin-bottom:8px">💡 我的灵感库（${insps.length}）</h3>
@@ -1117,9 +1365,9 @@ function initRecreation() {
       showToast('已加入今日待办');
     }));
     document.querySelectorAll('.btn-save-idea').forEach(btn => btn.addEventListener('click', () => {
-      const insps = JSON.parse(localStorage.getItem('cc_inspirations') || '[]');
+      const insps = JSON.parse(localStorage.getItem(storageKey('cc_inspirations')) || '[]');
       insps.push(btn.dataset.title);
-      localStorage.setItem('cc_inspirations', JSON.stringify(insps));
+      localStorage.setItem(storageKey('cc_inspirations'), JSON.stringify(insps));
       updateHomeStats();
       render();
       showToast('已保存到灵感库');
@@ -1142,7 +1390,7 @@ function initRecreation() {
 }
 
 function addTodoToToday(text) {
-  const k = 'cc_todo_' + fmtDate(new Date());
+  const k = storageKey('cc_todo_' + fmtDate(new Date()));
   const arr = JSON.parse(localStorage.getItem(k) || getInheritedTodos(new Date()));
   arr.push({ text, done: false, reflection: '' });
   localStorage.setItem(k, JSON.stringify(arr));
@@ -1154,8 +1402,8 @@ function initKnowledge() {
   const wrap = document.getElementById('knowledgeCardWrap');
   const btn = document.getElementById('knowledgeRefresh');
   const historyList = document.getElementById('knowledgeHistoryList');
-  const seenKey = 'cc_knowledge_seen';
-  const historyKey = 'cc_knowledge_history';
+  const seenKey = storageKey('cc_knowledge_seen');
+  const historyKey = storageKey('cc_knowledge_history');
   
   function getSeen() {
     return JSON.parse(localStorage.getItem(seenKey) || '[]');
@@ -1266,7 +1514,7 @@ function initEnglish() {
   const speedVal = document.getElementById('engSpeedVal');
   
   // 加载保存的语速
-  const savedSpeed = localStorage.getItem('cc_eng_speed');
+  const savedSpeed = localStorage.getItem(storageKey('cc_eng_speed'));
   if (savedSpeed) {
     engSpeed = parseFloat(savedSpeed);
     speedInput.value = engSpeed;
@@ -1276,7 +1524,7 @@ function initEnglish() {
   speedInput.addEventListener('input', () => {
     engSpeed = parseFloat(speedInput.value);
     speedVal.textContent = engSpeed.toFixed(1) + 'x';
-    localStorage.setItem('cc_eng_speed', engSpeed.toString());
+    localStorage.setItem(storageKey('cc_eng_speed'), engSpeed.toString());
   });
 
   // 生成器
@@ -1297,7 +1545,7 @@ function initEnglish() {
   }
 
   function ensureContent(date) {
-    const k = 'cc_eng_' + fmtDate(date);
+    const k = storageKey('cc_eng_' + fmtDate(date));
     let data = JSON.parse(localStorage.getItem(k) || 'null');
     if (!data) {
       data = { words: genWords(), speaking: genSpeaking(), ted: genTed(), shadowing: genShadowing(), monologue: '' };
@@ -1492,7 +1740,7 @@ function initEnglish() {
     }
     
     if (stats) {
-      const lastReview = localStorage.getItem('cc_fav_review_time');
+      const lastReview = localStorage.getItem(storageKey('cc_fav_review_time'));
       const lastText = lastReview ? new Date(parseInt(lastReview)).toLocaleDateString('zh-CN') : '从未';
       stats.innerHTML = `<div style="background:var(--bg);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--text-secondary)">
         📖 共收藏 <strong style="color:var(--primary-dark)">${favs.length}</strong> 个单词 · 上次复习：<strong>${lastText}</strong>
@@ -1501,13 +1749,13 @@ function initEnglish() {
       </div>`;
       const startBtn = document.getElementById('startFavReview');
       if (startBtn) startBtn.addEventListener('click', () => {
-        localStorage.setItem('cc_fav_review_time', Date.now().toString());
+        localStorage.setItem(storageKey('cc_fav_review_time'), Date.now().toString());
         showToast('复习模式：点击卡片翻面，点击🔊朗读');
       });
       const clearBtn = document.getElementById('clearFavs');
       if (clearBtn) clearBtn.addEventListener('click', () => {
         if (confirm('确定要清空所有收藏的单词吗？')) {
-          localStorage.setItem('cc_word_favorites', '[]');
+          localStorage.setItem(storageKey('cc_word_favorites'), '[]');
           renderFavorites();
           showToast('已清空收藏');
         }
@@ -1593,7 +1841,7 @@ function initEnglish() {
   if (favRefreshBtn) favRefreshBtn.addEventListener('click', () => { renderFavorites(); showToast('收藏库已刷新'); });
 
   function refreshSection(section) {
-    const k = 'cc_eng_' + fmtDate(state.currentDate);
+    const k = storageKey('cc_eng_' + fmtDate(state.currentDate));
     const data = JSON.parse(localStorage.getItem(k) || '{}');
     if (section === 'words') data.words = genWords();
     if (section === 'speaking') data.speaking = genSpeaking();
@@ -1622,7 +1870,7 @@ function initEnglish() {
     showToast('已随机生成（约' + n + '词）');
   });
   function saveMonologue(text) {
-    const k = 'cc_eng_' + fmtDate(state.currentDate);
+    const k = storageKey('cc_eng_' + fmtDate(state.currentDate));
     const data = JSON.parse(localStorage.getItem(k) || '{}');
     data.monologue = text;
     localStorage.setItem(k, JSON.stringify(data));
@@ -1671,7 +1919,7 @@ function initEnglish() {
     const list = [];
     for (let i = 0; i < 30; i++) {
       const d = addDays(new Date(), -i);
-      const data = JSON.parse(localStorage.getItem('cc_eng_' + fmtDate(d)) || 'null');
+      const data = JSON.parse(localStorage.getItem(storageKey('cc_eng_' + fmtDate(d))) || 'null');
       if (data) list.push({ d, data });
     }
     if (!list.length) {
@@ -1746,7 +1994,7 @@ function initDailyRecord() {
   const calEl = document.getElementById('recordCalendar');
   const historyList = document.getElementById('recordHistoryList');
 
-  function key(d) { return 'cc_record_' + fmtDate(d); }
+  function key(d) { return storageKey('cc_record_' + fmtDate(d)); }
   function renderDate() {
     titleEl.textContent = fmtDateCN(state.currentDate);
     const rec = JSON.parse(localStorage.getItem(key(state.currentDate)) || '{}');
@@ -1825,7 +2073,7 @@ function renderMiniCalendar(container, viewMonth, selectedDate, type, onClick) {
   for (let d = 1; d <= daysInMonth; d++) {
     const cur = new Date(y, m, d);
     const k = fmtDate(cur);
-    const raw = localStorage.getItem(`cc_${type}_${k}`);
+    const raw = localStorage.getItem(storageKey(`cc_${type}_${k}`));
     const rec = raw ? JSON.parse(raw) : null;
     let has = false;
     if (rec) {
@@ -1862,7 +2110,7 @@ function initAccounting() {
   const calEl = document.getElementById('accountCalendar');
   const historyList = document.getElementById('accountHistoryList');
 
-  function key(d) { return 'cc_account_' + fmtDate(d); }
+  function key(d) { return storageKey('cc_account_' + fmtDate(d)); }
   catsWrap.innerHTML = accountingCats.map(c => `
     <div class="cat-item"><span class="cat-emoji">${c.emoji}</span><span class="cat-label">${c.label}</span><input type="number" class="cat-money" data-key="${c.key}" min="0" step="0.01" placeholder="0.00" /></div>`).join('');
 
@@ -1919,7 +2167,7 @@ function initAccounting() {
 function getInheritedTodos(date) {
   for (let i = 1; i <= 400; i++) {
     const prev = addDays(date, -i);
-    const prevArr = JSON.parse(localStorage.getItem('cc_todo_' + fmtDate(prev)) || 'null');
+    const prevArr = JSON.parse(localStorage.getItem(storageKey('cc_todo_' + fmtDate(prev))) || 'null');
     if (prevArr && prevArr.length) {
       return JSON.stringify(prevArr.map(t => ({ text: t.text, done: false, reflection: '' })));
     }
@@ -1927,7 +2175,7 @@ function getInheritedTodos(date) {
   return '[]';
 }
 function getTodosForDate(date) {
-  const k = 'cc_todo_' + fmtDate(date);
+  const k = storageKey('cc_todo_' + fmtDate(date));
   let arr = JSON.parse(localStorage.getItem(k) || 'null');
   if (!arr) {
     arr = JSON.parse(getInheritedTodos(date));
@@ -1938,13 +2186,13 @@ function getTodosForDate(date) {
 
 // 每日待办：固定事项模板 + 每日独立完成状态
 function getDailyTodos() {
-  return JSON.parse(localStorage.getItem('cc_daily_todos') || '[]');
+  return JSON.parse(localStorage.getItem(storageKey('cc_daily_todos')) || '[]');
 }
 function saveDailyTodos(arr) {
-  localStorage.setItem('cc_daily_todos', JSON.stringify(arr));
+  localStorage.setItem(storageKey('cc_daily_todos'), JSON.stringify(arr));
 }
 function getDailyDoneState(date) {
-  const k = 'cc_daily_done_' + fmtDate(date);
+  const k = storageKey('cc_daily_done_' + fmtDate(date));
   const arr = JSON.parse(localStorage.getItem(k) || 'null');
   const templates = getDailyTodos();
   // 对齐长度
@@ -1954,7 +2202,7 @@ function getDailyDoneState(date) {
   return arr;
 }
 function saveDailyDoneState(date, stateArr) {
-  localStorage.setItem('cc_daily_done_' + fmtDate(date), JSON.stringify(stateArr));
+  localStorage.setItem(storageKey('cc_daily_done_' + fmtDate(date)), JSON.stringify(stateArr));
 }
 
 function initTodo() {
@@ -1973,7 +2221,7 @@ function initTodo() {
   const calEl = document.getElementById('todoCalendar');
   const historyList = document.getElementById('todoHistoryList');
 
-  function key(d) { return 'cc_todo_' + fmtDate(d); }
+  function key(d) { return storageKey('cc_todo_' + fmtDate(d)); }
 
   function save(arr) { localStorage.setItem(key(state.currentDate), JSON.stringify(arr)); updateHomeStats(); renderCalendar(); renderHistory(); }
 
