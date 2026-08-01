@@ -418,10 +418,13 @@ let currentAudio = null;
 let currentUtterance = null;
 let progressTimer = null;
 
-// 多个 TTS 端点，自动切换（按优先级排序）
+// 多个 TTS 端点，自动切换（国内可用优先）
 const TTS_ENDPOINTS = [
-  (text, lang) => `https://translate.google.com.hk/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${lang}&client=tw-ob`,
+  // 有道TTS（国内可直接访问，最稳定）
+  (text) => `https://dict.youdao.com/dictvoice?type=2&audio=${encodeURIComponent(text)}`,
+  // Google TTS（国内可能被墙，作为备选）
   (text, lang) => `https://translate.google.cn/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${lang}&client=tw-ob`,
+  (text, lang) => `https://translate.google.com.hk/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${lang}&client=tw-ob`,
   (text, lang) => `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${lang}&client=tw-ob`,
   (text, lang) => `https://translate.google.com.tw/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${lang}&client=tw-ob`
 ];
@@ -479,7 +482,7 @@ function tryPlayTTS(text, speed, btnEl, onAllFail, onEndedCb, attempt = 0) {
     onAllFail && onAllFail();
     return;
   }
-  
+
   const url = TTS_ENDPOINTS[attempt](text, 'en');
   const audio = new Audio();
   audio.src = url;
@@ -488,66 +491,70 @@ function tryPlayTTS(text, speed, btnEl, onAllFail, onEndedCb, attempt = 0) {
   audio.preload = 'auto';
   audio.timeoutId = null;
   audio.attemptIndex = attempt;
-  
+  audio.hasStarted = false;
+
   document.querySelectorAll('.speak-btn.playing').forEach(b => b.classList.remove('playing'));
   if (btnEl) btnEl.classList.add('playing');
-  
+
   currentAudio = audio;
   showAudioBar();
   updateAudioBar({ duration: null, currentTime: 0, paused: false });
-  
-  // 设置超时（5秒），超时换下一个端点
+
+  // 超时3秒未播放则换下一个端点
   audio.timeoutId = setTimeout(() => {
-    if (audio === currentAudio) {
+    if (audio === currentAudio && !audio.hasStarted) {
       audio.pause();
       audio.src = '';
       tryPlayTTS(text, speed, btnEl, onAllFail, onEndedCb, attempt + 1);
     }
-  }, 5000);
-  
-  const onSuccess = () => {
-    clearTimeout(audio.timeoutId);
-  };
-  
+  }, 3000);
+
   const onPlay = () => {
+    audio.hasStarted = true;
     clearTimeout(audio.timeoutId);
   };
-  
+
   const onEnd = () => {
     clearTimeout(audio.timeoutId);
     if (btnEl) btnEl.classList.remove('playing');
     if (onEndedCb) { onEndedCb(); }
     else { hideAudioBar(); }
   };
-  
+
   const onError = () => {
     clearTimeout(audio.timeoutId);
     if (audio === currentAudio) {
       audio.pause();
       audio.src = '';
-      // 尝试下一个端点
       tryPlayTTS(text, speed, btnEl, onAllFail, onEndedCb, attempt + 1);
     }
   };
-  
-  audio.addEventListener('loadeddata', onSuccess);
-  audio.addEventListener('canplay', onPlay);
-  audio.addEventListener('play', onPlay);
+
+  audio.addEventListener('playing', onPlay);
+  audio.addEventListener('canplaythrough', onPlay);
   audio.addEventListener('timeupdate', () => updateAudioBar(audio));
   audio.addEventListener('ended', onEnd);
   audio.addEventListener('error', onError);
-  
+
   audio.play().catch(() => {
     onError();
   });
 }
 
 // 降级方案：使用浏览器 Web Speech API
-function tryPlayWebSpeech(text, btnEl, speed, onEndedCb) {
+function tryPlayWebSpeech(text, btnEl, speed, onEndedCb, retryCount) {
   if (!('speechSynthesis' in window)) {
     hideAudioBar();
     if (btnEl) btnEl.classList.remove('playing');
     showToast('当前网络无法播放音频，请检查网络或使用最新版浏览器');
+    return;
+  }
+  
+  // 如果语音列表还没加载好，延迟重试最多3次
+  const voices = window.speechSynthesis.getVoices();
+  if (voices.length === 0 && (retryCount === undefined || retryCount < 3)) {
+    const retry = (retryCount || 0) + 1;
+    setTimeout(() => tryPlayWebSpeech(text, btnEl, speed, onEndedCb, retry), 200);
     return;
   }
   
@@ -558,10 +565,14 @@ function tryPlayWebSpeech(text, btnEl, speed, onEndedCb) {
   u.pitch = 1;
   u.volume = 1;
   
-  // 尝试选择英文语音
-  const voices = window.speechSynthesis.getVoices();
-  const enVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Female') || v.name.includes('Google') || v.name.includes('Samantha')));
-  if (enVoice) u.voice = enVoice;
+  // 尝试选择英文语音（优先高质量）
+  const enVoices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'));
+  if (enVoices.length > 0) {
+    const preferredNames = ['Samantha', 'Google UK English', 'Microsoft', 'Female', 'Natural'];
+    let bestVoice = enVoices.find(v => preferredNames.some(n => v.name.includes(n)));
+    if (!bestVoice) bestVoice = enVoices[0];
+    u.voice = bestVoice;
+  }
   
   document.querySelectorAll('.speak-btn.playing').forEach(b => b.classList.remove('playing'));
   if (btnEl) btnEl.classList.add('playing');
@@ -592,10 +603,13 @@ function tryPlayWebSpeech(text, btnEl, speed, onEndedCb) {
     if (onEndedCb) { onEndedCb(); }
     else { hideAudioBar(); }
   };
-  u.onerror = () => {
+  u.onerror = (e) => {
     if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
     if (btnEl) btnEl.classList.remove('playing');
     hideAudioBar();
+    if (e.error !== 'canceled' && e.error !== 'interrupted') {
+      showToast('语音合成失败');
+    }
   };
   
   currentUtterance = u;
@@ -739,6 +753,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initDataBackup();
   initAudioControls();
   updateHomeStats();
+  
+  // 预加载 Web Speech API 语音
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = () => {
+      window.speechSynthesis.getVoices();
+    };
+    window.speechSynthesis.getVoices();
+  }
+  
   document.addEventListener('click', (e) => {
     const card = e.target.closest('.stat-card.clickable');
     if (card && card.dataset.jump) {

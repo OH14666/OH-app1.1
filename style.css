@@ -45,11 +45,36 @@ body {
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 12px;
+  padding: 0 10px;
   z-index: 90;
   border-bottom: 1px solid var(--border);
   gap: 6px;
+}
+
+.mobile-header .menu-toggle {
+  flex-shrink: 0;
+}
+
+.mobile-header .page-title {
+  flex: 1;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: static;
+  transform: none;
+  min-width: 0;
+}
+
+.mobile-header .header-date {
+  flex-shrink: 0;
+  font-size: 10px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 /* 网络状态指示器 */
@@ -220,9 +245,6 @@ body {
   font-size: 18px;
   font-weight: 700;
   color: var(--primary-dark);
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .header-date {
